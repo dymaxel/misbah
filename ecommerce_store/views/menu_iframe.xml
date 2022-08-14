@@ -1,0 +1,24 @@
+<?xml  version="1.0"?>
+<odoo>
+
+<!--     <record id="iframe_video_setting_action" model="ir.actions.act_window">
+        <field name="name">Iframe Setting</field>
+        <field name="res_model">iframe.model</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="iframe_video_tree_view" model="ir.ui.view">
+        <field name="name">Iframe Setting</field>
+        <field name="model">iframe.model</field>
+        <field name="arch" type="xml">
+            <tree string="Iframe Model">
+                <field name="youtube_url" string="Iframe"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <menuitem id="iframe_video_menu"
+              name="Popup Video Iframe" action="iframe_video_setting_action"
+              parent="website.menu_website_global_configuration"
+              sequence="2"/> -->
+</odoo>

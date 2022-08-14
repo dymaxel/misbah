@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_website_product_template_stock_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.stock.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="prod_templ" invisible="1" />
+                <field name="hide_product_stock" attrs="{'invisible':[('prod_templ','=',False)]}" />
+                <field name="upc" />
+                <field name="case_upc" />
+                <field name="case_barcode" />
+                <field name="expiry_lot_date" />
+                <field name="min_qty" />
+                <field name="bilingual_frenchlabel" />
+            </field>
+        </field>
+    </record>
+    <!-- <template id="sh_shop_stock_assets_frontend" inherit_id="website.assets_frontend">
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/sh_shop_stock/static/src/js/shop_variant_stock.js" />
+        </xpath>
+    </template> -->
+    <template id="sh_website_product_variant_stock_inherit" inherit_id="website_sale.product" customize_show="True" name="Stock Alert">
+        <xpath expr="//a[@id='add_to_cart']" position="before">
+            <span t-if="website.show_stock_notification" id="shop_var_stock">
+                <br />
+                <div id="variant_stock" style="padding-bottom: 3%;" />
+            </span>
+        </xpath>
+    </template>
+    <template id="sh_website_product_outof_stock_inherit" inherit_id="website_sale.products" name="Product OutOf Stock">
+        <xpath expr="//div[@id='products_grid']//table//tbody//tr[1]//t//t" position="attributes">
+            <attribute name="t-if">(not website.exclude_outof_stock_product) or (td_product['product'].type!='product') or (td_product['product'].type == 'product' and td_product['product'].qty_available &gt; 0)</attribute>
+        </xpath>
+    </template>
+    <template id="sh_website_product_template_stock_inherit" inherit_id="website_sale.products_item" customize_show="True" name="Stock Alert">
+        <xpath expr="//div[hasclass('o_wsale_product_information_text')]" position="replace">
+            <div class="p-2 o_wsale_product_information_text">
+                <!-- <div style="max-height: 35%;height:35%"> -->
+                <h6 class="o_wsale_products_item_title">
+                    <a class="text-primary text-decoration-none" itemprop="name" t-att-href="product_href" t-att-content="product.name" t-field="product.name" />
+                    <a role="button" t-if="not product.website_published" t-att-href="product_href" class="btn btn-sm btn-danger" title="This product is unpublished.">Unpublished</a>
+                </h6>
+                <div class="product_price" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                    <span class="h5" t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                    <del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                    <span itemprop="price" style="display:none;" t-esc="combination_info['price']" />
+                    <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name" />
+                </div>
+                <!-- </div> -->
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('product_price')]" position="replace">
+            <div style="font-weight: bold;" class="product_price" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                <span t-if="website and website.show_stock_notification and product and (not product.hide_product_stock)">
+                    <t t-if="product and product.type=='product' and  int(product.sudo().qty_available - product.sudo().outgoing_qty) &gt; 0 and website and not website.show_only_left_qty_notification">
+                        <ol style="margin-left: -28px;">
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">SKU:
+                                <span t-esc="product.sudo().default_code"></span>
+                            </li>
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Barcode:
+                                <span t-esc="product.sudo().barcode"></span>
+                            </li>
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">UPC:
+                                <span t-esc="product.sudo().upc"></span>
+                            </li>
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Label:
+                                <span t-esc="product.sudo().bilingual_frenchlabel"></span>
+                            </li>
+                            <t t-if="product.sudo().expiry_lot_date">
+                                <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry:
+                                    <span t-esc="product.sudo().expiry_lot_date"></span>
+                                </li>
+                            </t>
+                            <t t-else="">
+                                <t t-if="product.sudo().new_expiry">
+                                    <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry:
+                                        <span t-esc="product.sudo().new_expiry" ></span>
+                                    </li>
+                                </t>
+                                <t t-else="">
+                                <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry: N/A</li>
+                                    </t>
+                            </t>
+                            <!-- <li>Min Qty: <span t-esc="product.sudo().min_qty"></span></li> -->
+                            <strong style="font-size:12px;">
+                        In Stock
+                                <t t-if="website.show_product_qty">
+                                    <span t-esc="int(product.sudo().qty_available - product.sudo().outgoing_qty)" />
+                                </t>
+                                <t t-foreach="product.sudo().packaging_ids" t-as="package">
+                                    <t t-if="package.qty != 1">
+                                        <span style="font-size:12px;">Case </span>
+                                        <span style="font-size:12px;" t-esc="round((product.sudo().qty_available - product.sudo().outgoing_qty) / package.qty, 0)"></span>
+                                    </t>
+                                </t>
+                                <t t-if="not product.sudo().packaging_ids">
+                                    <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" >MIN: N/A | CASE: N/A </span>
+                                </t>
+                            </strong>
+                            <br/>
+                            <b>
+                                <span style="font-size:12px;">
+                                    <t t-foreach="product.sudo().packaging_ids" t-as="package">
+                                        <t t-if="package.qty != 1">
+                                            <span style="font-size:12px;" >MIN:
+                                                <span style="font-size:12px;" t-esc='package.qty' /> | CASE:
+                                                <span style="font-size:12px;" t-esc='package.qty' /></span>
+                                        </t>
+                                        <t t-else="">
+                                            <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" >MIN: N/A | CASE: N/A </span>
+                                        </t>
+                                        <br/>
+                                        <span style="font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" class="h5" t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                        <del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                        <span itemprop="price" style="display:none;font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" t-esc="combination_info['price']" />
+                                        <span itemprop="priceCurrency" style="display:none;font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" t-esc="website.currency_id.name" />
+                                        <!-- <strong class="text text-danger" style="padding: 5px;font-size: 15px;font-family: 'Archivo Narrow';font-weight: normal;"> Out Of Stock</strong> -->
+                                    </t>
+                                </span>
+                            </b>
+                        </ol>
+                    </t>
+                    <t t-if="product and product.type=='product' and int(product.sudo().qty_available - product.sudo().outgoing_qty) &gt; 0 and website and website.show_only_left_qty_notification and product.sudo().qty_available &lt;= website.show_left_product_qty">
+                        <ol style="margin-left: -28px;">
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">SKU:
+                                <span t-esc="product.sudo().default_code"></span>
+                            </li>
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Barcode:
+                                <span t-esc="product.sudo().barcode"></span>
+                            </li>
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">UPC:
+                                <span t-esc="product.sudo().upc"></span>
+                            </li>
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Label:
+                                <span t-esc="product.sudo().bilingual_frenchlabel"></span>
+                            </li>
+                            <t t-if="product.sudo().expiry_lot_date">
+                                <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry:
+                                    <span t-esc="product.sudo().expiry_lot_date"></span>
+                                </li>
+                            </t>
+                            <t t-else="">
+                                <t t-if="product.sudo().new_expiry">
+                                    <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry:
+                                        <span t-esc="product.sudo().new_expiry" ></span>
+                                    </li>
+                                </t>
+                                <t t-else="">
+                                    <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry: N/A</li>
+                                </t>
+                                </t>
+                            <!-- <li>Min Qty: <span t-esc="product.sudo().min_qty"></span></li> -->
+                            <strong style="font-size:12px;">
+                        Only
+                                <t t-if="website.show_left_product_qty">
+                                    <span t-esc="int(product.sudo().qty_available - product.sudo().outgoing_qty)" />
+                                </t>
+                                <t t-foreach="product.sudo().packaging_ids" t-as="package">
+                                    <t t-if="package.qty != 1">
+                                        <span style="font-size:12px;">Case </span>
+                                        <span style="font-size:12px;" t-esc="round((product.sudo().qty_available - product.sudo().outgoing_qty) / package.qty, 0)"></span>
+                                    </t>
+                                </t>
+                            </strong>
+                            <br/>
+                            <b>
+                                <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">
+                                    <t t-foreach="product.sudo().packaging_ids" t-as="package">
+                                        <t t-if="package.qty != 1">
+                                            <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" >MIN:
+                                                <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" t-esc='package.qty' /> | CASE:
+                                                <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" t-esc='package.qty' /></span>
+                                        </t>
+                                        <t t-else="">
+                                            <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" >MIN: N/A | CASE: N/A </span>
+                                        </t>
+                                    </t>
+                                    <t t-if="not product.sudo().packaging_ids">
+                                        <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" >MIN: N/A | CASE: N/A </span>
+                                    </t>
+                                    <br/>
+                                    <span style="    font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" class="h5" t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                    <del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                    <span itemprop="price" style="display:none;font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" t-esc="combination_info['price']" />
+                                    <span itemprop="priceCurrency" style="display:none;font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" t-esc="website.currency_id.name" />
+                                    <strong class="text text-danger" style="padding: 5px;font-size: 15px;font-family: 'Archivo Narrow';font-weight: normal;"> Out Of Stock</strong>
+                                </span>
+                            </b>
+                        </ol>
+                    </t>
+                    <t t-if="product and product.type=='product' and (not int(product.sudo().qty_available - product.sudo().outgoing_qty) &gt; 0)">
+                        <ol style="margin-left: -28px;">
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">SKU:
+                                <span t-esc="product.sudo().default_code"></span>
+                            </li>
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Barcode:
+                                <span t-esc="product.sudo().barcode"></span>
+                            </li>
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">UPC:
+                                <span t-esc="product.sudo().upc"></span>
+                            </li>
+                            <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Label:
+                                <span t-esc="product.sudo().bilingual_frenchlabel"></span>
+                            </li>
+                            <t t-if="product.sudo().expiry_lot_date">
+                                <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry:
+                                    <span t-esc="product.sudo().expiry_lot_date"></span>
+                                </li>
+                            </t>
+                            <t t-else="">
+                                <t t-if="product.sudo().new_expiry">
+                                    <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry:
+                                        <span t-esc="product.sudo().new_expiry" ></span>
+                                    </li>
+                                </t>
+                                <t t-else="">
+                                    
+                                    <li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry: N/A</li>
+                                    </t>
+                                </t>
+                            <!-- <li>Min Qty: <span t-esc="product.sudo().min_qty"></span></li> -->
+                            <!-- 						<br/> -->
+                            <b>
+                                <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">
+                                    <t t-foreach="product.sudo().packaging_ids" t-as="package">
+                                        <t t-if="package.qty != 1">
+                                            <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" >MIN:
+                                                <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" t-esc='package.qty' /> | CASE:
+                                                <span style="font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" t-esc='package.qty' /></span>
+                                        </t>
+                                        <t t-else="">
+                                            <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" >MIN: N/A | CASE: N/A </span>
+                                        </t>
+                                    </t>
+                                    <t t-if="not product.sudo().packaging_ids">
+                                        <span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" >MIN: N/A | CASE: N/A </span>
+                                    </t>
+                                    <br/>
+                                    <span style="font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" class="h5" t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                                    <del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['price'] != combination_info['list_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                                    <span itemprop="price" style="display:none;font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" t-esc="combination_info['price']" />
+                                    <span itemprop="priceCurrency" style="display:none;font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" t-esc="website.currency_id.name" />
+                                    <strong class="text text-danger" style="padding: 5px;font-size: 15px;font-family: 'Archivo Narrow';font-weight: normal;"> Out Of Stock</strong>
+                                </span>
+                            </b>
+                        </ol>
+                    </t>
+                </span>
+            </div>
+        </xpath>
+    </template>
+    <template id="sh_website_product_template_addcart_inherit" inherit_id="website_sale.products_add_to_cart" name="Product Add to Cart">
+        <xpath expr="//t[2]/a" position="attributes">
+            <attribute name="t-if">(not website.show_stock_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 )</attribute>
+            <attribute name="t-if">
+                (not website.show_only_left_qty_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 and product.qty_available &lt;=
+                website.show_left_product_qty )
+            </attribute>
+        </xpath>
+        <xpath expr="//t[2]/a" position="attributes">
+            <attribute name="t-if">(not website.show_stock_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 )</attribute>
+            <attribute name="t-if">
+                (not website.show_only_left_qty_notification) or (product.hide_product_stock) or ( product.type!="product") or ( product.type=="product" and product.qty_available &gt; 0 and product.qty_available &lt;=
+                website.show_left_product_qty )
+            </attribute>
+        </xpath>
+    </template>
+    <template id="change_height_grid_inherit" inherit_id="website_sale.products">
+        <xpath expr="//td/div" position="attributes">
+            <attribute name="style" add="height:400px;" separator=" "/>
+        </xpath>
+    </template>
+</odoo>

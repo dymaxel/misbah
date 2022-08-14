@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_barcode">
+        <t t-call="web.basic_layout">
+        <t t-call="web.html_container">
+                <!-- Latest compiled and minified CSS -->
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+
+                <!-- jQuery library -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                
+                <!-- Latest compiled JavaScript -->
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+                <style type="text/css">
+                    table.table-bordered{
+                        border:1px solid black!important;
+                        margin-top:20px;
+                    }
+                    table.table-bordered > thead > tr > th{
+                        border:1px solid black!important;
+                    }
+                    table.table-bordered > tbody > tr > td{
+                        border:1px solid black!important;
+                        font-size:17px; 
+                        color:rgb(69,68,69); 
+                        font-family:'Courier New';
+                    }
+                    span{
+                        font-size:20px;
+                        font-weight:bold;
+                    }
+                    
+
+
+                    
+                </style>
+
+                <t t-foreach="docs" t-as="doc">
+
+                <t t-foreach="doc.get_data()" t-as="pilot">
+
+                    
+                        
+                        <table class="table table-bordered" style="height:700px;">
+
+                            <tbody>
+                            <tr style="background-color:#e0e0e0">
+                                <td style="text-align: left;" colspan="2">
+                                          <span>  Pallette # </span> <t t-esc="pilot"/><br/>
+                                        </td>
+                            </tr>
+                                    <tr>
+                                            
+                                        <td style="text-align: left; width:300px;">
+                                        <span> From  </span> <br/>
+                                        <t t-esc="doc.location_id.warehouse_id.name"/><br/>
+                                        <t t-esc="doc.location_id.warehouse_id.partner_id.street"/> 
+                                        <t t-esc="doc.location_id.warehouse_id.partner_id.street2"/> <br/>
+                                        <t t-esc="doc.location_id.warehouse_id.partner_id.city"/> - <t t-esc="doc.location_id.warehouse_id.partner_id.country_id.name"/><br/>
+                                        
+                                        </td>
+                                           
+                                           
+                                        <td style="text-align: left;">
+                                       <span> To </span> <br/>
+                                        <t t-esc="doc.location_dest_id.name"/><br/>
+                                        <t t-esc="doc.partner_id.name"/> - <t t-esc="doc.partner_id.company_name"/><br/>
+                                        <t t-esc="doc.partner_id.street"/> 
+                                        <t t-esc="doc.partner_id.street2"/><br/>
+                                        <t t-esc="doc.partner_id.city"/> - <t t-esc="doc.partner_id.country_id.name"/><br/>
+                                       
+                                      
+                                        
+                                        </td>
+                                            
+                                            
+                                    
+                                    </tr>
+
+                                    <tr>
+                                            
+                                        <td style="text-align: left;">
+                                        <img src='https://s3.ap-south-1.amazonaws.com/test-bucket-120/TTTEAHEHHGCYNXRM_image.jpeg' style="max-height: 80px;"/>
+                                        </td>
+                                        <td style="text-align: left;">
+                                       <span> Carrier </span> <br/>
+                                       <span> Ord# </span><t t-esc="doc.name"/><br/>
+                                       <span> BL# </span><br/>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align: left;" colspan="2">
+                                       <span> PO# </span> <span style="font-size:25px;"> <t t-esc="doc.name"/> </span> <br/>
+                                        </td>
+                                        <!-- <td style="text-align: left;">
+                                          <span>  Pilot # </span> <t t-esc="pilot"/><br/>
+                                        </td> -->
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align: left;" colspan="2">
+                                       <span> ID : </span> <t t-esc="doc.name"/><br/>
+                                       <span> PCK Date : </span> <t t-esc="doc.scheduled_date"/><br/>
+                                       <span> Operator : </span> <t t-esc="doc.partner_id.name"/><br/>
+                                       <span> Total Units : </span> <t t-esc="doc.x_studio_total_delivered"/><br/>
+                                       <span> Total Demand : </span> <t t-esc="doc.x_studio_total_demand"/><br/>
+                                       <span> Total Cases : </span> <t t-esc="doc.x_studio_total_cases"/>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align: center;" colspan="2">
+                                            <img src='https://barcode-list.com/barcodeImage.php?barcode=6281006077416' style="max-height: 100px;"/>
+                                        </td>
+                                    </tr>
+                            </tbody>
+    
+                        </table>
+
+                        <div style="height:200px;">
+                             
+                        </div>
+
+                </t>
+                </t>
+                    
+                    
+                  
+                </t>
+            </t>
+    
+
+
+    </template>
+
+</odoo>

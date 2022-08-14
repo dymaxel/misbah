@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sh_shop_product_quantity" inherit_id="website_sale.product_quantity">
+        <xpath expr="//input[@name='add_qty']" position="replace">
+            <t t-if="request.env['sh.moq.multi.website'].sudo().search([('website_id','=',request.website.id),('product_id','=',product.id)],limit=1)">
+                <t t-foreach="request.env['sh.moq.multi.website'].sudo().search([('website_id','=',request.website.id),('product_id','=',product.id)],limit=1)" t-as="data">
+                    <t t-if="product.company_id.multi_website_moq and data">
+                        <input type="text" class="form-control quantity" data-min="1" name="add_qty" id="qty_id" t-att-value="data.sh_increment_qty or 1" t-att-data-min="data.sh_increment_qty" t-att-data-setqty="data.sh_increment_qty or 1" />
+                    </t>
+                    <t t-else="">
+
+                        <input type="text" class="form-control quantity" data-min="1" name="add_qty" id="qty_id" t-att-value="product.sh_increment_qty or 1" t-att-data-min="product.sh_increment_qty" t-att-data-setqty="product.sh_increment_qty or 1" />
+
+                    </t>
+                </t>
+            </t>
+            <t t-else="">
+                <input type="text" class="form-control quantity" name="add_qty" id="qty_id" t-att-value="product.sh_increment_qty or 1" t-att-data-min="product.sh_increment_qty" t-att-data-setqty="product.sh_increment_qty or 1" />
+            </t>
+
+
+        </xpath>
+    </template>
+    <!-- This template is the one at the "Review order" step (the first one) on the checkout workflow. -->
+    <template id="sh_shop_qty_cart_lines" inherit_id="website_sale.cart_lines" name="SH Shopping Cart Lines">
+        <xpath expr="//input[hasclass('js_quantity')]" position="replace">
+            <t t-if="request.env['sh.moq.multi.website'].sudo().search([('website_id','=',request.website.id),('product_id','=',line.product_id.product_tmpl_id.id)],limit=1)">
+                <t t-foreach="request.env['sh.moq.multi.website'].sudo().search([('website_id','=',request.website.id),('product_id','=',line.product_id.product_tmpl_id.id)],limit=1)" t-as="data">
+                    <t t-if="line.product_id.company_id.multi_website_moq and data">
+                        <input type="text" class="js_quantity form-control quantity sh_shop_qty_input_qty" t-att-data-setqty="data.sh_increment_qty" t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id" t-att-value="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty" />
+                    </t>
+                    <t t-else="">
+                        <input type="text" class="js_quantity form-control quantity sh_shop_qty_input_qty" t-att-data-setqty="line.product_id.sh_increment_qty" t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id" t-att-value="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty" />
+                    </t>
+                </t>
+            </t>
+            <t t-else="">
+                <input type="text" class="js_quantity form-control quantity sh_shop_qty_input_qty" t-att-data-setqty="line.product_id.sh_increment_qty" t-att-data-line-id="line.id" t-att-data-product-id="line.product_id.id" t-att-value="int(line.product_uom_qty) == line.product_uom_qty and int(line.product_uom_qty) or line.product_uom_qty" />
+            </t>
+        </xpath>
+    </template>
+    <!--  Select Quantity on Product List Page -->
+    <template id="sh_products_item_inherit_qty" inherit_id="website_sale.products_item" active="False" customize_show="True" name="Select Quantity">
+        <xpath expr="//h6[hasclass('o_wsale_products_item_title')]" position="before">
+            <span class="css_quantity input-group" contenteditable="false" style="margin-left: 0px; margin-right: 10px;margin-bottom: 10px; ">
+                <div class="input-group-prepend">
+                    <a t-attf-href="#" class="btn btn-secondary js_add_cart_json" aria-label="Remove one" title="Remove one" style="padding: 1px 5px; height: 23px;">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                </div>
+                <t t-if="request.env['sh.moq.multi.website'].sudo().search([('website_id','=',request.website.id),('product_id','=',product.id)],limit=1)">
+                    <t t-foreach="request.env['sh.moq.multi.website'].sudo().search([('website_id','=',request.website.id),('product_id','=',product.id)],limit=1)" t-as="data">
+                        <t t-if="request.env.user.partner_id.Customer_Type.id == 3">
+                            <input type="text" class="form-control quantity" data-min="1" name="add_qty" id="input_qty_list" t-att-value="1" t-att-data-min="1" t-att-data-setqty="1" />
+                        </t>
+                        <t t-else="">
+                            <t t-if="product.company_id.multi_website_moq and data">
+                                <input type="text" class="form-control quantity" data-min="1" name="add_qty" id="input_qty_list" t-att-value="data.sh_increment_qty or 1" t-att-data-min="data.sh_increment_qty" t-att-data-setqty="data.sh_increment_qty or 1" />
+                            </t>
+                            <t t-else="">
+                                <input type="text" class="form-control quantity" data-min="1" name="add_qty" id="input_qty_list" t-att-value="product.sh_increment_qty or 1" t-att-data-min="product.sh_increment_qty" t-att-data-setqty="product.sh_increment_qty or 1" />
+
+                            </t>
+                        </t>
+                    </t>
+                </t>
+                <t t-else="">
+                    <t t-if="request.env.user.partner_id.Customer_Type.id == 3">
+                            <input type="text" class="form-control quantity" data-min="1" name="add_qty" id="input_qty_list" t-att-value="1" t-att-data-min="1" t-att-data-setqty="1" />
+                     </t>
+                     <t t-else="">
+                        <input type="text" class="form-control quantity" name="add_qty" id="input_qty_list" t-att-value="product.sh_increment_qty or 1" t-att-data-min="product.sh_increment_qty" t-att-data-setqty="product.sh_increment_qty or 1" />
+                    </t>
+                </t>
+
+                <div class="input-group-append">
+                    <a t-attf-href="#" class="btn btn-secondary float_left js_add_cart_json" aria-label="Add one" title="Add one" style="padding: 1px 5px; height: 23px;">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </span>
+        </xpath>
+    </template>
+
+    <!--  Ajax for Add To cart Product List Page -->
+
+    <template id="sh_products_add_to_cart_inherit" inherit_id="website_sale.products_add_to_cart" name="Add to Cart">
+        <xpath expr="//a[hasclass('a-submit')]" position="replace">
+            <t t-if="len(product.product_variant_ids) == 1">
+                <button type="button" role="button" class="btn btn-secondary sh_add_cart" title="Shopping cart" t-att-data-product-product-id="product.product_variant_ids[0].id if product.product_variant_ids else '0'">
+                    <span class="fa fa-shopping-cart" role="img" aria-label="Shopping cart"></span>
+                </button>
+            </t>
+            <t t-if="len(product.product_variant_ids) &gt; 1">
+                <a href="#" role="button" class="btn btn-secondary a-submit" aria-label="Shopping cart" title="Shopping cart">
+                    <span class="fa fa-shopping-cart" />
+                </a>
+            </t>
+        </xpath>
+    </template>
+
+    <!--  Ajax for Add To cart Product Detail Page -->
+    <template id="sh_website_sale_product_inherit" inherit_id="website_sale.product" name="Product">
+        <xpath expr="//a[@id='add_to_cart']" position="replace">
+            <button type="button" role="button" class="btn btn-primary btn-lg mt8 js_check_product sh_add_cart" title="Add to Cart">Add to Cart</button>
+            <a role="button" id="add_to_cart" class="d-none btn btn-primary btn-lg mt8 js_check_product a-submit" href="#">Add to Cart</a>
+        </xpath>
+    </template>
+
+    <!--  Added Animate class in Cart -->
+    <template id="sh_website_sale_header_inherit" inherit_id="website_sale.header_cart_link" name="Header Shop My Cart Link">
+        <xpath expr="//li[contains(@t-attf-class, 'o_wsale_my_cart')]" position="replace">
+            <li t-attf-class="nav-item o_wsale_my_cart #{'' if website_sale_order and website_sale_order.cart_quantity else 'd-none'}">
+                <a href="/shop/cart" class="nav-link">
+                    <i class="fa fa-shopping-cart"></i>
+                    My Cart
+                    <sup t-attf-class="my_cart_quantity o_animate_blink badge badge-primary" t-esc="website_sale_order and website_sale_order.cart_quantity or ''" />
+                </a>
+            </li>
+        </xpath>
+    </template>
+</odoo>

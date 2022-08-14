@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="sale_order_line_inherit" model="ir.ui.view">
+        <field name="name">stock.picking.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            
+           <xpath expr="//field[@name='partner_id']" position="after">
+           
+           <field name="pilot"/>
+
+          
+
+
+            </xpath>
+
+        </field>
+</record> 
+
+    <report
+    id="report_barcode_button"
+    model="stock.picking"
+    string="Packing Label"
+    report_type="qweb-pdf"
+    name="Packing Label"
+    file="barcode_print.report_barcode"
+    />
+
+    <record id="paperformat_euro" model="report.paperformat">
+        <field name="name">A5</field>
+        <field name="default" eval="True" />
+        <field name="format">A5</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">3</field>
+        <field name="margin_bottom">5</field>
+        <field name="margin_left">3</field>
+        <field name="margin_right">3</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="barcode_print.report_barcode_button" model="ir.actions.report">
+        <field name="paperformat_id" ref="barcode_print.paperformat_euro" />
+        <field name="name">Packing Label</field>
+        <field name="report_name">barcode_print.report_barcode</field>
+        <field name="model">stock.picking</field>
+    </record>
+
+
+
+</odoo>
+
+

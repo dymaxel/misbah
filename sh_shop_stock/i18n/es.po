@@ -1,0 +1,168 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_shop_stock
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-15 12:18+0000\n"
+"PO-Revision-Date: 2020-10-15 12:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_shop_stock
+#: model_terms:ir.ui.view,arch_db:sh_shop_stock.sh_website_product_template_stock_inherit
+msgid ""
+"<strong class=\"text text-danger\" style=\"padding: 5px;\">Out Of "
+"Stock</strong>"
+msgstr ""
+"<strong class=\"text text-danger\" style=\"padding: 5px;\">Fuera de "
+"Valores</strong>"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_product_template__prod_templ
+msgid "Compute Product Template"
+msgstr "Plantilla de producto de cálculo"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_product_product__prod_templ
+msgid "Compute Product Variant"
+msgstr "Calcular variante de producto"
+
+#. module: sh_shop_stock
+#: model:ir.model,name:sh_shop_stock.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_product_product__display_name
+#: model:ir.model.fields,field_description:sh_shop_stock.field_product_template__display_name
+#: model:ir.model.fields,field_description:sh_shop_stock.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:sh_shop_stock.field_website__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_res_config_settings__show_only_left_qty_notification
+msgid "Enable Show Only Left Quantity ?"
+msgstr "¿Habilitar Mostrar solo la cantidad restante?"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_res_config_settings__exclude_outof_stock_product
+#: model:ir.model.fields,field_description:sh_shop_stock.field_website__exclude_outof_stock_product
+msgid "Exclude Out Of Stock Product"
+msgstr "Excluir producto agotado"
+
+#. module: sh_shop_stock
+#: model_terms:ir.ui.view,arch_db:sh_shop_stock.sh_website_res_config_settings_product_stock_inherit
+msgid "Exclude out of stock product from website"
+msgstr "Excluir producto agotado del sitio web"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_product_product__hide_product_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_product_template__hide_product_stock
+msgid "Hide Product Stock Status?"
+msgstr "¿Ocultar estado de stock del producto?"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_product_product__id
+#: model:ir.model.fields,field_description:sh_shop_stock.field_product_template__id
+#: model:ir.model.fields,field_description:sh_shop_stock.field_res_config_settings__id
+#: model:ir.model.fields,field_description:sh_shop_stock.field_website__id
+msgid "ID"
+msgstr "CARNÉ DE IDENTIDAD"
+
+#. module: sh_shop_stock
+#: model_terms:ir.ui.view,arch_db:sh_shop_stock.sh_website_product_template_stock_inherit
+msgid "In Stock"
+msgstr "En stock"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_product_product____last_update
+#: model:ir.model.fields,field_description:sh_shop_stock.field_product_template____last_update
+#: model:ir.model.fields,field_description:sh_shop_stock.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:sh_shop_stock.field_website____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: sh_shop_stock
+#: model_terms:ir.ui.view,arch_db:sh_shop_stock.sh_website_product_template_stock_inherit
+msgid "Only"
+msgstr "Solamente"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_website__show_left_product_qty
+msgid "Only Left Quantity"
+msgstr "Solo queda cantidad"
+
+#. module: sh_shop_stock
+#: model:ir.model,name:sh_shop_stock.model_product_product
+msgid "Product"
+msgstr "Producto"
+
+#. module: sh_shop_stock
+#: model:ir.model,name:sh_shop_stock.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: sh_shop_stock
+#: model_terms:ir.ui.view,arch_db:sh_shop_stock.sh_website_product_template_stock_inherit
+msgid "Quantity Left)"
+msgstr "Cantidad restante)"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_res_config_settings__show_product_qty
+#: model:ir.model.fields,field_description:sh_shop_stock.field_website__show_product_qty
+msgid "Show Available Qty?"
+msgstr "¿Mostrar cantidad disponible?"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_website__show_only_left_qty_notification
+msgid "Show Only Left Quantity ?"
+msgstr "¿Mostrar solo la cantidad restante?"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_res_config_settings__show_left_product_qty
+msgid "Show Only Left Quantity?"
+msgstr "¿Mostrar solo la cantidad restante?"
+
+#. module: sh_shop_stock
+#: model:ir.model.fields,field_description:sh_shop_stock.field_res_config_settings__show_stock_notification
+#: model:ir.model.fields,field_description:sh_shop_stock.field_website__show_stock_notification
+msgid "Show Stock Notification?"
+msgstr "¿Mostrar notificación de stock?"
+
+#. module: sh_shop_stock
+#: model_terms:ir.ui.view,arch_db:sh_shop_stock.sh_website_res_config_settings_product_stock_inherit
+msgid "Show available product quantity"
+msgstr "Mostrar cantidad de producto disponible"
+
+#. module: sh_shop_stock
+#: model_terms:ir.ui.view,arch_db:sh_shop_stock.sh_website_res_config_settings_product_stock_inherit
+msgid "Show only left qty on website"
+msgstr "Mostrar solo la cantidad restante en el sitio web"
+
+#. module: sh_shop_stock
+#: model_terms:ir.ui.view,arch_db:sh_shop_stock.sh_website_res_config_settings_product_stock_inherit
+msgid "Show only left quantity"
+msgstr "Mostrar solo la cantidad restante"
+
+#. module: sh_shop_stock
+#: model_terms:ir.ui.view,arch_db:sh_shop_stock.sh_website_res_config_settings_product_stock_inherit
+msgid "Show product stock notification on website"
+msgstr "Mostrar notificación de stock de productos en el sitio web"
+
+#. module: sh_shop_stock
+#: model:ir.model,name:sh_shop_stock.model_website
+msgid "Website"
+msgstr "Sitio web"
+
+#. module: sh_shop_stock
+#: model_terms:ir.ui.view,arch_db:sh_shop_stock.sh_website_res_config_settings_product_stock_inherit
+msgid "Website Product Stock"
+msgstr "Stock de productos del sitio web"

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="survey">
+        <t t-call="website.layout">
+            <div id="wrap" class="o_wevent_index bottom_fill">
+                <div id="oe_structure_we_index_1" class="oe_structure">
+                    <!--<section
+                            class="parallax s_parallax_is_fixed s_parallax_no_overflow_hidden pt168 pb256"
+                            data-scroll-background-ratio="1" style="background-image: none;">-->
+                    <section
+                            class="parallax s_parallax_is_fixed s_parallax_no_overflow_hidden pb160"
+                            data-scroll-background-ratio="1" style="background-image: none;">
+                        <span class="s_parallax_bg"
+                              style="background-image: url('/shop_survey/static/src/images/surveyImage.png'); background-position: 0 205%; height:40vh"
+                        >
+                        </span>
+                        <div class="row s_nb_column_fixed header_card" id="header">
+                            <div class="col-md-8  title-bg-color" id="title_box">
+                                <h1 class="col-lg-12 animate__slideInLeft survey_title">Send us your feedback!</h1>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="container px-4 cards_body">
+                <div class="row gx-5">
+                    <t t-foreach="surveys" t-as="data">
+                         <div style="border: 1px solid black width: 18rem;" class="col-sm">
+                             <div class="card-body">
+                            <img t-attf-src="data:image/jpg;base64,{{ data.background_image }}"
+                                 class="card-img-top" alt="..."/>
+                                 <h5 class="card-title text-center"><t t-esc = "data.title"/></h5>
+                            <p class="card-text">
+                                <t t-esc="data.description"/>
+                            </p>
+                            <p class="text-center">
+                                <a t-attf-href="/survey/start/{{data.access_token}}" target="blank" class="btn btn-primary">Go somewhere</a>
+                            </p>
+                        </div>
+                         </div>
+
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

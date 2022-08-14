@@ -1,0 +1,156 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_qty_shop_ajax_moq
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-21 06:05+0000\n"
+"PO-Revision-Date: 2020-11-21 06:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_website_sale_header_inherit
+msgid ""
+"<i class=\"fa fa-shopping-cart\"/>\n"
+"                    My Cart"
+msgstr ""
+"<i class=\"fa fa-shopping-cart\"/>\n"
+"                    Mi carrito"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_products_add_to_cart_inherit
+msgid "<span class=\"fa fa-shopping-cart\" role=\"img\" aria-label=\"Shopping cart\"/>"
+msgstr "<span class=\"fa fa-shopping-cart\" role=\"img\" aria-label=\"Carrito de compras\"/>"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_products_item_inherit_qty
+msgid "Add one"
+msgstr "Agrega uno"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_website_sale_product_inherit
+msgid "Add to Cart"
+msgstr "Añadir al carrito"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model,name:sh_qty_shop_ajax_moq.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model,name:sh_qty_shop_ajax_moq.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes de configuración"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__display_name
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__id
+msgid "ID"
+msgstr "CARNÉ DE IDENTIDAD"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__write_date
+msgid "Last Updated on"
+msgstr "Ultima actualización en"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model,name:sh_qty_shop_ajax_moq.model_sh_moq_multi_website
+msgid "MOQ Multi Website"
+msgstr "Sitio web de MOQ Multi"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_product__multi_website_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_template__multi_website_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_res_company__multi_website_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_res_config_settings__multi_website_moq
+msgid "MOQ for Multi Website?"
+msgstr "MOQ para varios sitios web?"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_product_template_form_view
+msgid "Multi Website MOQ"
+msgstr "MOQ de varios sitios web"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_moq_multi_website_res_config_settings_view_form
+msgid "Multiple Qty for Multi Website"
+msgstr "Cantidad múltiple para varios sitios web"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_product__sh_increment_qty
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_template__sh_increment_qty
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__sh_increment_qty
+msgid "Multiples of Quantity"
+msgstr "Múltiplos de cantidad"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__product_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model,name:sh_qty_shop_ajax_moq.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de producto"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_products_item_inherit_qty
+msgid "Remove one"
+msgstr "Quitar uno"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model,name:sh_qty_shop_ajax_moq.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de orden de venta"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_products_add_to_cart_inherit
+msgid "Shopping cart"
+msgstr "Carrito de compras"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__website_id
+msgid "Website"
+msgstr "Sitio web"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_product__multi_website_ids
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_template__multi_website_ids
+msgid "Website wise MOQ"
+msgstr "MOQ sabio del sitio web"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_product_template_form_view
+msgid "Website wise Qty"
+msgstr "Cantidad sabia del sitio web"

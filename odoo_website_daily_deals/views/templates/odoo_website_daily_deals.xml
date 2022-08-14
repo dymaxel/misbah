@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Add Deals &amp; Offers menu in all footer styles-->
+		<template id="daily_deals_footer_custom" inherit_id="website.footer_custom" name="Daily Deals Footer Link">
+			<xpath expr="//div[hasclass('container')]//ul/li[last()]" position="after">
+				<li class="">
+					<a href="/deals">Deals &amp; Offers</a>
+				</li>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_footer_links" inherit_id="website.template_footer_links">
+			<xpath expr="//div[hasclass('container')]//ul/li[last()]" position="after">
+				<li class="list-item py-1">
+					<a href="/deals">Deals &amp; Offers</a>
+				</li>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_footer_minimalist" inherit_id="website.template_footer_minimalist">
+			<xpath expr="//div[hasclass('container')]//ul/li[last()]" position="after">
+				<li class="list-inline-item">
+					<a href="/deals">Deals &amp; Offers</a>
+				</li>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_footer_contact" inherit_id="website.template_footer_contact">
+			<xpath expr="//div[hasclass('container')]//ul/li[last()]" position="after">
+				<li class="list-inline-item">
+					<a href="/deals">Deals &amp; Offers</a>
+				</li>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_footer_headline" inherit_id="website.template_footer_headline">
+			<xpath expr="//div[hasclass('container')]//ul/li[last()]" position="after">
+				<li class="">
+					<a href="/deals">Deals &amp; Offers</a>
+				</li>
+			</xpath>
+		</template>
+
+		<!-- Deals &amp; Offers menu -->
+		<template id="header_daily_deals" name="Daily Deals header Link">
+			<li class="nav-item">
+				<a class="nav-link" href="/deals">
+					<span>Deals &amp; Offers</span>
+				</a>
+			</li>
+		</template>
+
+		<!-- <template id="add_user_name" inherit_id="portal.user_dropdown">
+			<xpath expr="//li/a" position="inside">
+				<span class="login_name" t-if="user_id.name!='Public user'" t-esc="user_id.name"></span>
+			</xpath>
+		</template> -->
+
+
+		<!-- Add Deals &amp; Offers menu in all header styles-->
+		<template id="daily_deals_menu_template_header_default" inherit_id="website.template_header_default">
+			<xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_header_hamburger" inherit_id="website.template_header_hamburger">
+			<xpath expr="//t[@t-call='portal.placeholder_user_sign_in']" position="after">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_header_vertical" inherit_id="website.template_header_vertical">
+			<xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_header_sidebar" inherit_id="website.template_header_sidebar">
+			<xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_header_slogan" inherit_id="website.template_header_slogan">
+			<xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_header_contact" inherit_id="website.template_header_contact">
+			<xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_header_boxed" inherit_id="website.template_header_boxed">
+			<xpath expr="//t[@t-call='portal.placeholder_user_sign_in']" position="before">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_header_centered_logo" inherit_id="website.template_header_centered_logo">
+			<xpath expr="//t[@t-call='portal.placeholder_user_sign_in']" position="before">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_header_image" inherit_id="website.template_header_image">
+			<xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_header_hamburger_full" inherit_id="website.template_header_hamburger_full">
+			<xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<template id="daily_deals_menu_template_header_magazine" inherit_id="website.template_header_magazine">
+			<xpath expr="//t[@t-foreach='website.menu_id.child_id']" position="after">
+				<t t-call="odoo_website_daily_deals.header_daily_deals"></t>
+			</xpath>
+		</template>
+
+		<!-- Deals & Offers page -->
+		<template id="deals" name="Deals &amp; Offers">
+			<t t-call="website.layout">
+				<div id="wrap">
+					<div class="oe_structure">
+						<form class="form-horizontal" role="form" action="/download_deals_catalog" method="POST">
+						<section class="s_feature_grid">
+							<t t-set="website_offers" t-value="website.get_deals_offers()"/>
+							<t t-if="not website_offers">
+								<h3 class="text-center mt64">
+									No any Deals and Offers available
+								</h3>
+							</t>
+							<t t-foreach="website_offers" t-as="offers">
+								<t t-if="offers.show_deals_header">
+									<h1 class="title-1 text-center"><span t-field="offers.deals_title"/></h1>
+								</t>
+								<label class="ontrol-label col-sm-2">Choose Style</label>
+								<div class="col-sm-10">
+									<input type="radio" class="s_website_form_input" value="style_img" name="style" checked="on"/>
+									<label >Product Per Page View</label>
+									<input type="radio" class="s_website_form_input" value="style_3" name="style" checked="on"/>
+									<label >List View</label>
+									<input type="radio" class="s_website_form_input" value="style_5" name="style"/>
+									<label >Picture View</label>
+									<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+									<input type="hidden" class="s_website_form_input" t-att-value="offers.id" name="offer_id_get"/>
+									<button type="submit" class="btn btn-primary">Download</button>
+								</div>
+								
+								<t t-if="offers.what_to_show == 'banner_only'">
+									<section class="jumbotron s_big_message banner_image_bg" t-attf-style="background-image: url('/web/image/website.deals.offers/#{offers.id}/banner_only')">
+										<div class="container">
+											<h1><span t-field="offers.deals_title"/></h1>
+											<p>
+												<span t-field="offers.description"/>
+											</p>
+											<p>
+												<a class="btn btn-primary btn-lg" href="/deals">
+													Click to Get this Deal
+												</a>
+											</p>
+										</div>
+									</section>
+								</t>
+
+								<t t-if="offers.what_to_show in ['both','products_only']">
+									<section t-if="offers.what_to_show == 'both'" class="jumbotron s_big_message banner_image_bg" t-attf-style="background-image: url('/web/image/website.deals.offers/#{offers.id}/banner')">
+										<div class="container">
+											<h1><span t-field="offers.deals_title"/></h1>
+											<p>
+												<span t-field="offers.description"/>
+											</p>
+											<p>
+												<a class="btn btn-primary btn-lg" href="/deals">
+													Click to Get this Deal
+												</a>
+											</p>
+										</div>
+									</section>
+									<t t-if="offers.display_deals_as == 'grid' ">
+										<div class="container mt32">
+											<div class="row">
+												<t t-if="offers.offers_products" t-set="is_global" t-value="offers.offers_products.filtered(lambda c: c.applied_on in ['3_global','2_product_category'])"></t>
+												<t t-if="not is_global">
+													<t t-foreach="offers.offers_products" t-as="products">
+														<t t-set="combination_info" t-value="products.sudo().product_tmpl_id._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+														<a t-att-href="'/shop/product/%s' % products.product_tmpl_id.id">
+															<div class="col-md-2 col-sm-3 col-xs-4" style="padding-left:0px;padding-right:0px;">
+															<div class="offer-product-item">
+																	<div class="pi-img-wrapper">
+																		<a itemprop="url" t-att-href="'/shop/product/%s' % products.product_tmpl_id.id">
+																			<span itemprop="image"
+																				t-field="products.product_tmpl_id.product_variant_ids[0].image_1920" t-options='{"widget": "image", "class": "img img-responsive"}'/>
+																		</a>
+																	</div>
+																	<br></br>
+																	<h3 style="font-weight:bold;height: 70px;">
+																		<a t-att-href="'/shop/product/%s' % products.product_tmpl_id.id" t-field="products.product_tmpl_id.name"></a>
+																	</h3>
+																	<ol style="margin-left: -28px;">
+																		<li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">SKU:
+																			<span t-esc="products.product_tmpl_id.product_variant_ids[0].default_code"></span>
+																		</li>
+																		<li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Barcode:
+																			<span t-esc="products.product_tmpl_id.product_variant_ids[0].barcode"></span>
+																		</li>
+																		<li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">UPC:
+																			<span t-esc="products.product_tmpl_id.product_variant_ids[0].upc"></span>
+																		</li>
+																		<li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Label:
+																			<span t-esc="products.product_tmpl_id.product_variant_ids[0].bilingual_frenchlabel"></span>
+																		</li>
+																		<t t-if="products.product_tmpl_id.product_variant_ids[0].expiry_lot_date">
+																			<li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry:
+																				<span t-esc="products.product_tmpl_id.product_variant_ids[0].expiry_lot_date" t-options="{'widget': 'date'}" ></span>
+																			</li>
+																		</t>
+																		<t t-else="">
+																			<t t-if="products.product_tmpl_id.product_variant_ids[0].new_expiry">
+																				<li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry:
+																					<span t-esc="products.product_tmpl_id.product_variant_ids[0].new_expiry" ></span>
+																				</li>
+																			</t>
+																			<t t-else="">
+																			<li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry: N/A</li>
+																				</t>
+																		</t>
+																		<!-- <li>Min Qty: <span t-esc="products.product_tmpl_id.product_variant_ids[0].min_qty"></span></li> -->
+																		<strong style="font-size:12px;">
+																	In Stock
+																			<t t-if="website.show_product_qty">
+																				<span t-esc="int(products.product_tmpl_id.product_variant_ids[0].qty_available - products.product_tmpl_id.product_variant_ids[0].outgoing_qty)" />
+																			</t>
+																			<t t-foreach="products.product_tmpl_id.product_variant_ids[0].packaging_ids" t-as="package">
+																				<t t-if="package.qty != 1">
+																					<span style="font-size:12px;">Case </span>
+																					<span style="font-size:12px;" t-esc="round((products.product_tmpl_id.product_variant_ids[0].qty_available - products.product_tmpl_id.product_variant_ids[0].outgoing_qty) / package.qty, 0)"></span>
+																				</t>
+																			</t>
+																			<t t-if="not products.product_tmpl_id.product_variant_ids[0].packaging_ids">
+																				<span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" >MIN: N/A | CASE: N/A </span>
+																			</t>
+																		</strong>
+																		<br/>
+																		<b>
+																			<span style="font-size:12px;">
+																				<t t-foreach="products.product_tmpl_id.product_variant_ids[0].packaging_ids" t-as="package">
+																					<t t-if="package.qty != 1">
+																						<span style="font-size:12px;" >MIN:
+																							<span style="font-size:12px;" t-esc='package.qty' /> | CASE:
+																							<span style="font-size:12px;" t-esc='package.qty' /></span>
+																					</t>
+																					<t t-else="">
+																						<span style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;" >MIN: N/A | CASE: N/A </span>
+																					</t>
+																					<br/>
+																					<span style="    font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" class="h5" t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+																					<del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+																					<span itemprop="price" style="display:none;font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" t-esc="combination_info['price']" />
+																					<span itemprop="priceCurrency" style="display:none;font-size: 23px;font-family: 'Archivo Narrow';font-weight: bold;" t-esc="website.currency_id.name" />
+																					<!-- <strong class="text text-danger" style="padding: 5px;font-size: 15px;font-family: 'Archivo Narrow';font-weight: normal;"> Out Of Stock</strong> -->
+																				</t>
+																			</span>
+																		</b>
+																	</ol>
+																<!-- <div class="product_price mb-1" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+																	<span class="h5" t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+																	<del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+																	<span itemprop="price" style="display:none;" t-esc="combination_info['price']" />
+																	<span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name" />
+																</div> -->
+
+																<!-- <form action="/shop/cart/update" method="post">
+																	<input name="product_id" t-att-value="products.product_tmpl_id.product_variant_ids[0].id" type="hidden" />
+																	<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+																	<button type="submit" title="Add to Cart" class="btn add2cart" onclick="submit();">
+																		<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+																		<span> Add to Cart</span>
+																	</button>
+																</form> -->
+
+																<div class="sticker sticker-new">
+																	<t t-if="offers.show_deals_message_before_expiry">
+																		<span t-esc="offers.deals_message_before_expiry" style="color: green;"/>
+																		<br></br>
+																	</t>
+																	<t t-if="offers.show_deals_message_after_expiry">
+																		<span t-esc="offers.deals_message_after_expiry" style="color: red;"/>
+																	</t>
+																</div>
+															</div>
+														</div>
+														</a>
+													</t>
+												</t>
+												<t t-if="is_global">
+													<div class="offer-product-item">
+														<div class="pi-img-wrapper">
+															<a itemprop="url" href="/shop">
+																<t t-if="is_global.applied_on == '3_global'">
+																	Discount is applied on all products, Goto shop to check Discount
+																</t>
+																<t t-if="is_global.applied_on == '2_product_category'">
+																	Discount is applied on category, Goto category to check Discount
+																</t>
+															</a>
+														</div>
+													</div>
+												</t>
+											</div>
+										</div>
+									</t>
+									<!-- Slider View -->
+									<t t-if="offers.display_deals_as == 'slider'">
+										<div class="container">
+											<div class="row">
+												<div id="adv_team_4_columns_carousel" class="carousel slide four_shows_one_move team_columns_carousel_wrapper col-md-12" data-ride="carousel" data-pause="hover">
+													<div class="carousel-inner" role="listbox">
+														<t t-if="offers.offers_products" t-set="is_global" t-value="offers.offers_products.filtered(lambda c: c.applied_on in ['3_global','2_product_category'])"></t>
+														<t t-if="not is_global">
+															<t t-foreach="offers.offers_products" t-as="products">
+																<t t-set="combination_info" t-value="products.sudo().product_tmpl_id._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+																<div t-att-class="'carousel-item' if len(offers.offers_products) &gt; 4 else 'item'">
+																	<div t-att-class="'col-md-3 team_columns_item_image' if len(offers.offers_products) &gt; 4 else 'col-md-12 team_columns_item_image'">
+																		<a t-att-href="'/shop/product/%s' % products.product_tmpl_id.id">
+																			<span t-field="products.product_tmpl_id.product_variant_ids[0].image_1920" t-options='{"widget": "image", "class": "img img-responsive"}'/></a>
+																		<div class="team_columns_item_caption">
+																			<a t-att-href="'/shop/product/%s' % products.product_tmpl_id.id">
+																				<h4>
+																					<span t-field="products.product_tmpl_id.name" style="color: #FEB600;"/>
+																				</h4>
+																			</a>
+																			<div class="product_price mb-1" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+																				<span class="h5" t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+																				<del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+																				<span itemprop="price" style="display:none;" t-esc="combination_info['price']" />
+																				<span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name" />
+																			</div>
+																			<hr/>
+																			<form action="/shop/cart/update" method="post">
+																				<input name="product_id" t-att-value="products.product_tmpl_id.product_variant_ids[0].id" type="hidden" />
+																				<input type="hidden" name="csrf_token"
+																					   t-att-value="request.csrf_token()" />
+																				<button type="submit" title="Add to Cart" class="btn btn-primary btn-sm" onclick="submit();">
+																					<span class="fa fa-shopping-cart"> </span>Add to Cart
+																				</button>
+																			</form>
+																			<div class="sticker sticker-new">
+																				<t t-if="offers.show_deals_message_before_expiry">
+																					<span t-esc="offers.deals_message_before_expiry" style="color: green;"/>
+																					<br></br>
+																				</t>
+																				<t t-if="offers.show_deals_message_after_expiry">
+																					<span t-esc="offers.deals_message_after_expiry" style="color: red;"/>
+																				</t>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</t>
+														</t>
+														<t t-if="is_global">
+															<div class="offer-product-item">
+																<div class="pi-img-wrapper">
+																	<a itemprop="url" href="/shop">
+																		<t t-if="is_global.applied_on == '3_global'">
+																			Discount is applied on all products, Goto shop to check Discount
+																		</t>
+																		<t t-if="is_global.applied_on == '2_product_category'">
+																			Discount is applied on category, Goto category to check Discount
+																		</t>
+																	</a>
+																</div>
+															</div>
+														</t>
+													</div>
+													<t t-if="len(offers.offers_products) &gt; 4">
+														<a class="left carousel-control team_columns_carousel_control_left adv_left" href="#adv_team_4_columns_carousel" role="button" data-slide="prev" style="display: inline-block;">
+															<span class="fa fa-angle-left team_columns_carousel_control_icons" style="top: 0% !important;"></span>
+															<span class="sr-only">Previous</span>
+														</a>
+														<!--======= Right Button =========-->
+														<a class="right carousel-control team_columns_carousel_control_right adv_right" href="#adv_team_4_columns_carousel" role="button" data-slide="next" style="display: inline-block;">
+															<span class="fa fa-angle-right team_columns_carousel_control_icons" style="top: 0% !important;"></span>
+															<span class="sr-only">Next</span>
+														</a>
+													</t>
+												</div>
+											</div>
+										</div>
+									</t>
+									<!-- attractive view -->
+									<div class="container">
+										<div class="row">
+											<t t-if="offers.display_deals_as == 'attractive'">
+												<t t-if="offers.offers_products" t-set="is_global" t-value="offers.offers_products.filtered(lambda c: c.applied_on in ['3_global','2_product_category'])"></t>
+												<t t-if="not is_global">
+													<t t-foreach="offers.offers_products" t-as="products">
+														<t t-set="combination_info" t-value="products.sudo().product_tmpl_id._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+														<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+															<div class="my-list">
+																<span t-field="products.product_tmpl_id.product_variant_ids[0].image_1920" t-options='{"widget": "image", "class": "img img-responsive"}'/>
+																<h3>
+																	<span t-field="products.product_tmpl_id.name"/>
+																</h3>
+																<div class="product_price mb-1" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+																	<span class="h5" t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+																	<del t-attf-class="text-danger ml-1 h6 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+																	<span itemprop="price" style="display:none;" t-esc="combination_info['price']" />
+																	<span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name" />
+																</div>
+
+																<span class="pull-right"><span t-field="products.product_tmpl_id.default_code"/></span>
+																<div class="offer offer_div">
+																	<div class="sticker sticker-new">
+																		<t t-if="offers.show_deals_message_before_expiry">
+																			<span t-esc="offers.deals_message_before_expiry" style="color: green;"/>
+																			<br></br>
+																		</t>
+																		<t t-if="offers.show_deals_message_after_expiry">
+																			<span t-esc="offers.deals_message_after_expiry" style="color: red;"/>
+																		</t>
+																	</div>
+																</div>
+																<div class="detail">
+																	<p><span t-field="products.product_tmpl_id.description_sale"/></p>
+																	<a t-att-href="'/shop/product/%s' % products.product_tmpl_id.id"><span t-field="products.product_tmpl_id.product_variant_ids[0].image_1920" t-options='{"widget": "image", "class": "img img-responsive"}'/></a>
+
+																	<form action="/shop/cart/update" method="post">
+																		<input name="product_id" t-att-value="products.product_tmpl_id.product_variant_ids[0].id"
+																			   type="hidden" />
+																		<input type="hidden" name="csrf_token"
+																			   t-att-value="request.csrf_token()" />
+
+																		<button type="submit" title="Add to Cart" class="btn btn-info"
+																				onclick="submit();">
+																			<span class="fa fa-shopping-cart"> </span> Add to Cart
+																		</button>
+																	</form>
+																</div>
+															</div>
+														</div>
+													</t>
+												</t>
+												<t t-if="is_global">
+													<div class="offer-product-item">
+														<div class="pi-img-wrapper">
+															<a itemprop="url" href="/shop">
+																<t t-if="is_global.applied_on == '3_global'">
+																	Discount is applied on all products, Goto shop to check Discount
+																</t>
+																<t t-if="is_global.applied_on == '2_product_category'">
+																	Discount is applied on category, Goto category to check Discount
+																</t>
+															</a>
+														</div>
+													</div>
+												</t>
+											</t>
+										</div>
+									</div>
+								</t>
+							</t>
+						</section>
+						</form>
+					</div>
+				</div>
+
+			</t>
+		</template>
+
+
+		<template id="products_inherit" inherit_id="website_sale.products">
+			<xpath expr="//tr[@t-foreach='bins']" position="before">
+				<t t-set="website_offers" t-value="website.get_deals_offers()"/>
+				<t t-set="is_global" t-value="false"></t>
+				<t t-foreach="website_offers" t-as="offers">
+					<t t-if="offers.offers_products" t-set="is_true" t-value="offers.offers_products.filtered(lambda c: c.applied_on in ['3_global','2_product_category'])"></t>
+					<t t-if="is_true">
+						<t t-set="is_global" t-value="offers"></t>
+					</t>
+				</t>
+			</xpath>
+		</template>
+		<template id="products_item_inherit" inherit_id="website_sale.products_item">
+			<xpath expr="//form" position="inside">
+				<t t-if="is_global">
+					<t t-if="offers.offers_products">
+						<t t-set="offers_products_cat" t-value="website._get_offers_products_cat()"/>
+						<t t-set="offers_product_tmpl" t-value="website._get_offers_products_tmpl()"/>
+						<t t-if="product.categ_id.id in offers_products_cat or product.id in offers_product_tmpl">
+							<t t-if="is_global.show_deals_message_before_expiry">
+								<span t-esc="is_global.deals_message_before_expiry" style="color: green;position: absolute; top: 0px;"/>
+							</t>
+							<t t-if="is_global.show_deals_message_after_expiry">
+								<span t-esc="is_global.deals_message_after_expiry" style="color: red;position: absolute; top: 20px;"/>
+							</t>
+						</t>
+					</t>
+				</t>
+			</xpath>
+		</template>
+	</data>
+</odoo>

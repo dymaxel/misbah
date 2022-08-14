@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+
+    <template id="website_catalog_down" name="Create Customer">
+        <script type="text/javascript">
+
+        </script>
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="or_structure">
+                    <div class="container">
+                        <form class="form-horizontal" role="form" action="/download_catalog" method="POST">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <h2> Product Catalog</h2>
+                        <div class="form-group row">
+                            <label class="ontrol-label col-sm-2">Choose Style</label>
+                            <div class="col-sm-10">
+                                <input type="radio" class="s_website_form_input" value="style_3" name="style" checked="on"/>
+                                <label >List view</label><br></br>
+                                <input type="radio" class="s_website_form_input" value="style_5" name="style"/>
+                                <label >Card view</label><br></br>
+                            </div>
+
+                            <label class="ontrol-label col-sm-2">Select Pricelist</label>
+                            <select name="product_pricelist" t-att-value="product_pricelist" id="product_pricelist" class="form-control link style">
+                                <t t-foreach="pricelist" t-as="pl">
+                                    <option t-esc="pl.name" t-att-value="pl.id"></option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="form-row clearfix on_login_buttons">
+                            <button type="submit" class="btn btn-primary catalog_download_button">Download</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

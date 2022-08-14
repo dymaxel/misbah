@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.server" id="auto_upc_generate">
+        <field name="name">Generate Upc</field>
+        <field name="model_id" ref="model_product_template"/>
+        <field name="sequence">1</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="code">
+for rec in record:
+  rec.generateupc()
+        </field>
+    </record>
+</odoo>

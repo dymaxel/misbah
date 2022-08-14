@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t owl="1" t-name="custom_barcode_operations.MainComponent" t-inherit="stock_barcode.MainComponent" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_barcode_control','o_action_buttons', 'd-flex')]" position="before">
+            <t t-set="tot_units" t-value="0"/>
+            <t t-set="tot_pkgs" t-value="0"/>
+            <t t-foreach="lines" t-as="line" t-key="line.virtual_id">
+                <t t-set="tot_units" t-value="tot_units+line.product_uom_qty"/>
+                <t t-set="tot_pkgs" t-value="tot_pkgs+line.demand_qty_packages"/>
+            </t>
+            <div class="o_barcode_control o_action_buttons d-flex">
+                <button class="o_put_in_pack btn btn-secondary text-uppercase">Total Quantity Demanded = <t t-esc="tot_units"/></button>
+                <button class="o_add_line btn btn-secondary text-uppercase">Total Packages Demanded = <t t-esc="tot_pkgs"/></button>
+            </div>
+        </xpath>
+
+    </t>
+
+</templates>

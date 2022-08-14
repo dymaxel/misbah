@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="categories_link12" name="Categories Link">
+        <div t-att-data-link-href="keep('/shop/category/' + slug(c), category=0)"
+             class="custom-control custom-radio mb-1 d-inline-block">
+            <i t-if="children" t-attf-class="fa #{'fa-minus' if c.id in category.parents_and_self.ids else 'fa-plus'}"
+               t-attf-title="#{'Unfold' if c.id in category.parents_and_self.ids else 'Fold'}"
+               t-attf-aria-label="#{'Unfold' if c.id in category.parents_and_self.ids else 'Fold'}" role="img"/>
+
+            <input type="radio" style="pointer-events:none;" class="custom-control-input d-none" t-att-id="c.id"
+                   t-att-value="c.id" t-att-checked="'true' if c.id == category.id else None"/>
+            <label class="font-weight-normal" t-att-for="c.id" t-field="c.name"/>
+        </div>
+    </template>
+
+    <template id="product_checkout1" name="checkout page" inherit_id="website_sale.cart">
+        <xpath expr="//t[@t-call='website_sale.cart_lines']" position="before" groups="base.group_user">
+            <div class="offset-md-3 col-md-6" groups="base.group_user">
+                <div class="form-group form-inline">
+                    <label for="select_customer">Order for:</label>
+                    <!--<select name="select_customer" id="select_customer">
+                    </select>-->
+                    <!--<input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">-->
+                    <div class="dropdown">
+                        <input name="select_customer" placeholder="Select Customer" id="select_customer"
+                               class='form-control'/>
+                        <div id="select_customers" class="dropdown-content">
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+
+    <template id="inherit_categories_recursive_311" inherit_id="website_sale.option_collapse_categories_recursive"
+              name="Category List Items Custom">
+        <xpath expr="//t[@t-call='website_sale.categorie_link']" position="attributes">
+            <attribute name="t-call">ecommerce_store.categories_link12</attribute>
+        </xpath>
+    </template>
+
+
+    <!--Inherit main products shop page to show popup-->
+<!--     <template id="inherit_shop_page" inherit_id="website_sale.products">
+        <xpath expr="//div[hasclass('o_wsale_products_main_row')]" position="before">
+            <t t-call="website.s_popup"/>
+        </xpath>
+    </template> -->
+
+    <template id="inherit_categories_recursive_6" inherit_id="website_sale.products_categories"
+              name="Category List Items Custom">
+        <xpath expr="//div[@id='wsale_products_categories_collapse']" position="replace">
+            <div class="collapse d-lg-block" id="wsale_products_categories_collapse">
+                <strong class="o_categories_collapse_title text-uppercase">Categories</strong>
+                <ul class="nav flex-column my-2" id="o_shop_collapse_category">
+                    <form>
+                        <li class="nav-item">
+                            <div t-att-data-link-href="keep('/shop', category=0)"
+                                 class="custom-control custom-radio mb-1 d-inline-block">
+                                <i t-if="children"
+                                   t-attf-class="fa #{'fa-minus' if c.id in category.parents_and_self.ids else 'fa-plus'}"
+                                   t-attf-title="#{'Unfold' if c.id in category.parents_and_self.ids else 'Fold'}"
+                                   t-attf-aria-label="#{'Unfold' if c.id in category.parents_and_self.ids else 'Fold'}"
+                                   role="img"/>
+
+                                <input type="radio" style="pointer-events:none;"
+                                       class="custom-control-input o_not_editable" t-att-id="all_products"
+                                       t-att-value="all_products" t-att-checked="'true' if not category else None"/>
+                                <label class="font-weight-normal" t-att-for="all_products">All Products</label>
+                            </div>
+                        </li>
+                        <t t-foreach="categories" t-as="c">
+                            <t t-call="website_sale.option_collapse_categories_recursive"/>
+                        </t>
+                    </form>
+                </ul>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="product_lines_inherit" inherit_id="website_sale.cart">
+             <xpath expr="//div[hasclass('clearfix')]" position="before">
+
+            <p class="text-danger">Delievry can't be accepted on following days</p>
+
+
+
+            <div class="weekDays-selector">
+                <t t-if="website_sale_order.monday==True">
+                    <input type="checkbox" checked="1" id="weekday-mon" class="weekday" name="weekday" value="monday"/>
+                    <label for="weekday-mon">Monday</label>
+                </t>
+                <t t-else="">
+                    <input type="checkbox" checked="1" id="weekday-mon" class="weekday" name="weekday" value="monday"/>
+                    <label for="weekday-mon">Monday</label>
+                </t>
+
+
+                <t t-if="website_sale_order.tuesday==True">
+                <input type="checkbox" checked="1" id="weekday-tue" class="weekday" name="weekday" value="tuesday"/>
+                <label for="weekday-tue">Tuesday</label>
+                </t>
+                <t t-else="">
+                    <input type="checkbox" id="weekday-tue" class="weekday" name="weekday" value="tuesday"/>
+                    <label for="weekday-tue">Tuesday</label>
+                </t>
+                <t t-if="website_sale_order.wednesday==True">
+                <input type="checkbox" checked="1" id="weekday-wed" class="weekday" name="weekday" value="wednesday"/>
+                <label for="weekday-wed">Wednesday</label>
+                </t>
+                <t t-else="">
+                <input type="checkbox" id="weekday-wed" class="weekday" name="weekday" value="wednesday"/>
+                <label for="weekday-wed">Wednesday</label>
+                </t>
+                <t t-if="website_sale_order.thursday==True">
+                <input type="checkbox" checked="1" id="weekday-thu" class="weekday" name="weekday" value="thursday"/>
+                <label for="weekday-thu">Thursday</label>
+                </t>
+                <t t-else="">
+                <input type="checkbox" id="weekday-thu" class="weekday" name="weekday" value="thursday"/>
+                <label for="weekday-thu">Thursday</label>
+                </t>
+                <t t-if="website_sale_order.friday==True">
+                <input type="checkbox" checked="1" id="weekday-fri" class="weekday" name="weekday" value="friday"/>
+                <label for="weekday-fri">Friday</label>
+                </t>
+                 <t t-else="">
+                <input type="checkbox" id="weekday-fri" class="weekday" name="weekday" value="friday"/>
+                <label for="weekday-fri">Friday</label>
+                 </t>
+
+                <t t-if="website_sale_order.saturday==True">
+                <input type="checkbox" checked="1" id="weekday-sat" class="weekday" name="weekday" value="saturday"/>
+                <label for="weekday-sat">Saturday</label>
+                </t>
+                <t t-else="">
+                <input type="checkbox" id="weekday-sat" class="weekday" name="weekday" value="saturday"/>
+                <label for="weekday-sat">Saturday</label>
+                </t>
+
+
+                <t t-if="website_sale_order.sunday==True">
+                <input type="checkbox" checked="1" id="weekday-sun" class="weekday" name="weekday" value="sunday"/>
+                <label for="weekday-sun">Sunday</label>
+                </t>
+
+
+                 <t t-else="">
+                <input type="checkbox" id="weekday-sun" class="weekday" name="weekday" value="sunday"/>
+                <label for="weekday-sun">Sunday</label>
+                 </t>
+            </div>
+        </xpath>
+    </template>
+
+    <!--Inherit website sale -->
+<!--     <template id="website_sale_inherit" inherit_id="website.s_popup">
+        <xpath expr="//div[@class='row s_nb_column_fixed']" position="replace">
+
+        </xpath>
+
+        <xpath expr="//div[hasclass('modal-content')]/section" position="replace">
+            <section class="s_banner oe_img_bg o_bg_img_center" data-snippet="s_banner">
+                <div class="container">
+                    <t t-set="video" t-value="request.env['iframe.model'].sudo().search([],order='id desc',limit=1)"/>
+                        <t t-if="video.youtube_url">
+                            <t t-raw="video.youtube_url"/>
+                        </t>
+                </div>
+            </section>
+        </xpath>
+
+    </template> -->
+
+    <!--  <template id="sh_website_product_outof_stock_inherit" inherit_id="website_sale.products" name="Product OutOf Stock">
+          <xpath expr="//div[@id='products_grid']//table//tbody//tr[1]//t//t" position="attributes">
+              <attribute name="t-if">(not website.exclude_outof_stock_product) or (td_product['product'].type!='product') or (td_product['product'].type == 'product' and td_product['product'].qty_available &gt; 0)</attribute>
+          </xpath>
+      </template>-->
+
+    <!--Inherit Foooter and Add Newsletter in about us Section-->
+    <template id="newsletter_footer_custom" inherit_id="website.footer_custom" name="Newsletter Footer">
+        <xpath expr="//div[hasclass('pb24')]//p" position="after">
+            <div class="pb24 news_letter">
+                <t t-snippet-call="website_mass_mailing.s_newsletter_subscribe_form"/>
+
+            </div>
+        </xpath>
+    </template>
+
+
+    <record id="inherit_sale_order_form" model="ir.ui.view">
+        <field name="name">inherit.sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='order_lines']" position="after">
+                <page name="Select Delievery Day" string="Select Delievery Day">
+
+
+                    <group>
+
+                        <field name="monday"/>
+
+                        <field name="tuesday"/>
+
+                        <field name="wednesday"/>
+
+                        <field name="thursday"/>
+
+                        <field name="friday"/>
+
+                        <field name="saturday"/>
+
+                        <field name="sunday"/>
+                    </group>
+
+
+                </page>
+            </xpath>
+        </field>
+
+    </record>
+
+
+
+</odoo>

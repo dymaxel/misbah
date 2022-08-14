@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_barcode_password_inherit_form" model="ir.ui.view">
+        <field name="name">barcode.password.inherit.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <h6>Is Barcode Operations Admin?</h6>
+                <h3><field name="is_admin" /></h3>
+                <h6>Barcode Password</h6>
+                <h3><field name="barcode_pass" password="True"  placeholder="Enter Barcode password" style="width:55%;" attrs="{'required': [(
+                    'is_admin', '=', True)]}"/></h3>
+            </xpath>
+            <field name="company_id" position="after">
+                <field name="user_type_id"/>
+            </field>
+        </field>
+    </record>
+    <record id="view_users_search_inherit_form" model="ir.ui.view">
+        <field name="name">res.users.search.inherit.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <group expand="1" string="Group By">
+                    <filter string="User Type" name='user_type' context="{'group_by':'user_type_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t owl="1" t-name="ecommerce_store.custom_barcode_messages" t-inherit="stock_barcode.MainComponent"
+       t-inherit-mode="extension">
+        <xpath expr="//span[hasclass('o_scan_message')]" position="before">
+            <div class="row" id="scan_barcode_header1">
+             <input type="radio" id="scan_products" name="scan_barcode"/>
+          <label for="scan_products">Scan Products</label>
+          <input type="radio" id="scan_packages" name="scan_barcode"/>
+          <label for="scan_packages">Scan Packages</label>
+            </div>
+        </xpath>
+    </t>
+
+    <!--    <div t-name="ecommerce_store.signature_dialog" t-inherit="web.signature_dialog">
+            <xpath expr="//div[hasclass('o_web_sign_name_and_signature')]" position="after">
+                    <div class="mt16 small">By Clickingggggggggggggggggggggggggggggggggggggggggggggggggg</div>
+            </xpath>
+
+        </div>-->
+</templates>

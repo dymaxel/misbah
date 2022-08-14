@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sale_note" name="Sale Note" inherit_id="website_sale.payment">
+        <xpath expr="//div[@id='payment_method']" position="before">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <h4>Add sale note</h4>
+                    <textarea class="form-control" rows="2" id="internal_notes" placeholder="write a message for your order here...."/>
+                </div>
+            </div>
+        </xpath>
+    </template>
+    <template id="reduction_code" inherit_id="website_sale.total" customize_show="True" name="Promo Code">
+        <xpath expr="//div[@id='cart_total']//table/tr[last()]" position="after">
+            <tr t-if="not hide_promotions">
+                <td colspan="3" class="text-center text-xl-right border-0">
+                <span class=''>
+                    <t t-set='force_coupon' t-value="website_sale_order.pricelist_id.code or request.params.get('code_not_available')"/>
+                    <t t-if="not force_coupon">
+                        <a href="#" class="show_coupon">I have a promo code</a>
+                    </t>
+                    <div t-attf-class="coupon_form #{not force_coupon and 'd-none'}">
+                        <t t-call="website_sale.coupon_form"/>
+                    </div>
+                </span>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+    <template id="create_customer" name="Create Customer">
+        <script type="text/javascript">
+
+
+        </script>
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="or_structure">
+                    <div class="container">
+                        <form class="form-horizontal" role="form" action="/create/customer" method="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <br/>
+                            <br/>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label for="customer_type" class="control-label">Customer Type</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="form-group">
+                                        <select class="selectpicker form-control" name="customer_type">
+
+                                            <t t-foreach="website.get_customer_types()" t-as="type">
+                                                <option t-att-value="type.id" t-esc="type.name"/>
+                                            </t>
+                                            <!--<option>Customer Type</option>
+                                            <option>Wholesaler</option>
+                                            <option>Retailer</option>
+                                            <option>Consumer</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="company_name" class="control-label col-sm-2">Company Name *</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="company_name" t-att-value="company_name" id="company_name"
+                                           class="form-control" required="required"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="company_address" class="control-label col-sm-2">Street</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="company_address" t-att-value="company_address"
+                                           id="company_address" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <div class="form-group row">
+                                        <label for="company_city" class="control-label  col-sm-6">City</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="company_city" t-att-value="company_city"
+                                                   id="company_city" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <div class="form-group row">
+                                        <label for="company_country" class="control-label  col-sm-6">Country</label>
+                                        <div class="col-sm-6">
+                                            <!--<input type="text" name="company_zip" t-att-value="company_zip" id="company_zip" class="form-control"/>-->
+
+                                            <select name="company_country" t-att-value="company_country"
+                                                    id="company_country" class="form-control link style">
+                                                <t t-foreach="country" t-as="cus">
+                                                    <option t-esc="cus.name" t-att-value="cus.id"></option>
+                                                </t>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <div class="form-group row">
+                                        <label for="company_zip" class="control-label  col-sm-6">Zip Code</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="company_zip" t-att-value="company_zip"
+                                                   id="company_zip" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="company_phone" class="control-label col-sm-2">Company Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="company_phone" t-att-value="company_phone"
+                                           id="company_phone" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="company_mobile" class="control-label col-sm-2">Company Mobile</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="company_mobile" t-att-value="company_mobile"
+                                           id="company_mobile" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="company_email" class="control-label col-sm-2">Company Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="company_email" t-att-value="company_email"
+                                           id="company_email" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="company_website" class="control-label col-sm-2">Company Website</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="company_website" t-att-value="company_website"
+                                           id="company_website" class="form-control"/>
+                                </div>
+                            </div>
+                            <!--                         <div class="form-group row">
+                                                        <label for="company_address" class="control-label col-sm-2">Company Address</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" name="company_address" t-att-value="company_address" id="company_address" class="form-control"/>
+                                                        </div>
+                                                    </div> -->
+                            <!--manager-->
+                            <div class="form-group row">
+                                <label for="manager_add_yn" class=" col-sm-auto s_website_form_label">Do You Want To Add
+                                    Manager?
+                                </label>
+                                <div class="col-sm form-check">
+                                    <input type="checkbox" class="s_website_form_input" name="manager_add_yn"
+                                           t-att-value="manager_add_yn" id="manager_add_yn"/>
+                                </div>
+                            </div>
+                            <div id="myDIV" style="display:none">
+
+                                <div class="form-group row">
+                                    <label for="manager_name" class="ontrol-label col-sm-2">Manager Name *</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="manager_name" t-att-value="manager_name"
+                                               id="manager_name" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="manager_email" class="ontrol-label col-sm-2">Manager Email *</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="manager_email" t-att-value="manager_email"
+                                               id="manager_email" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="manager_phone" class="ontrol-label col-sm-2">Manager Phone *</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="manager_phone" t-att-value="manager_phone"
+                                               id="manager_phone" class="form-control"/>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label for="manager_fax_no" class="ontrol-label col-sm-2">Manager Fax No</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="manager_fax_no" t-att-value="manager_fax_no"
+                                               id="manager_fax_no" class="form-control"/>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <!--Accountent-->
+                            <div class="form-group row">
+                                <label for="account_add_yn" class=" col-sm-auto s_website_form_label">Do You Want To Add
+                                    Accountant?
+                                </label>
+                                <div class="col-sm form-check">
+                                    <input type="checkbox" class="s_website_form_input" name="account_add_yn"
+                                           t-att-value="account_add_yn" id="account_add_yn"/>
+                                </div>
+                            </div>
+                            <div id="AccountentDiv" style="display:none">
+
+                                <div class="form-group row">
+                                    <label for="accountent_name" class="ontrol-label col-sm-2">Accountant Name *</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="accountent_name" t-att-value="accountent_name"
+                                               id="accountent_name" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="accountent_email" class="ontrol-label col-sm-2">Accountant Email *
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="accountent_email" t-att-value="accountent_email"
+                                               id="accountent_email" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="accountent_phone" class="ontrol-label col-sm-2">Accountant Phone *
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="accountent_phone" t-att-value="accountent_phone"
+                                               id="accountent_phone" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="accountent_fax_no" class="ontrol-label col-sm-2">Accountant Fax No
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="accountent_fax_no" t-att-value="accountent_fax_no"
+                                               id="accountent_fax_no" class="form-control"/>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!--Billing Address-->
+
+                            <div class="form-group row">
+                                <label for="billing_name" class="ontrol-label col-sm-2">Billing Name *</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="billing_name" t-att-value="billing_name" id="billing_name"
+                                           class="form-control" required="required"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="billing_email" class="ontrol-label col-sm-2">Billing Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="billing_email" t-att-value="billing_email"
+                                           id="billing_email" class="form-control"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="billing_phone" class="ontrol-label col-sm-2">Billing Phone *</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="billing_phone" t-att-value="billing_phone"
+                                           id="billing_phone" class="form-control" required="required"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="billing_address" class="control-label col-sm-2">Billing Address *</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="billing_address" t-att-value="billing_address"
+                                           id="billing_address" class="form-control" required="required"/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <div class="form-group row">
+                                        <label for="billing_city" class="control-label  col-sm-6">City</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="billing_city" t-att-value="billing_city"
+                                                   id="billing_city" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <div class="form-group row">
+                                        <label for="billing_country" class="control-label  col-sm-6">Country</label>
+                                        <div class="col-sm-6">
+                                            <select name="billing_country" t-att-value="billing_country"
+                                                    id="billing_country" class="form-control link style">
+                                                <t t-foreach="country" t-as="cus">
+                                                    <option t-esc="cus.name" t-att-value="cus.id"></option>
+                                                </t>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <div class="form-group row">
+                                        <label for="billing_zip" class="control-label  col-sm-6">Zip Code</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="billing_zip" t-att-value="company_zip"
+                                                   id="billing_zip" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--shipping-->
+                            <div class="form-group row">
+                                <label for="shipping_add_yn" class=" col-sm-auto s_website_form_label">Same as shipping
+                                    address?
+                                </label>
+                                <div class="col-sm form-check">
+                                    <input type="checkbox" class="s_website_form_input" name="shipping_add_yn"
+                                           t-att-value="shipping_add_yn" id="shipping_add_yn" checked="false"/>
+                                </div>
+                            </div>
+
+                            <div id="ShippingDiv" style="display:none">
+                                <div class="form-group row">
+                                    <label for="shipping_name" class="ontrol-label col-sm-2">Shipping Name *</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="shipping_name" t-att-value="shipping_name"
+                                               id="shipping_name" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="shipping_email" class="ontrol-label col-sm-2">Shipping Email</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="shipping_email" t-att-value="shipping_email"
+                                               id="shipping_email" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="shipping_phone" class="ontrol-label col-sm-2">Shipping Phone *</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="shipping_phone" t-att-value="shipping_phone"
+                                               id="shipping_phone" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="shipping_address" class="control-label col-sm-2">Shipping Address *
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="shipping_address" t-att-value="shipping_address"
+                                               id="shipping_address" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <div class="form-group row">
+                                            <label for="shipping_city" class="control-label  col-sm-6">City</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="shipping_city" t-att-value="shipping_city"
+                                                       id="shipping_city" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <div class="form-group row">
+                                            <label for="billing_country" class="control-label  col-sm-6">Country</label>
+                                            <div class="col-sm-6">
+                                                <select name="shipping_country" t-att-value="shipping_country"
+                                                        id="shipping_country" class="form-control link style">
+                                                    <t t-foreach="country" t-as="cus">
+                                                        <option t-esc="cus.name" t-att-value="cus.id"></option>
+                                                    </t>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <div class="form-group row">
+                                            <label for="shipping_zip" class="control-label  col-sm-6">Zip Code</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" name="shipping_zip" t-att-value="shipping_zip"
+                                                       id="shipping_zip" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row clearfix on_login_buttons">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <record id="customer_created_thanks" model="website.page">
+        <field name="name">Thanks</field>
+        <field name="type">qweb</field>
+        <field name="url">customer-create-success</field>
+        <field name="website_published">True</field>
+        <field name="key">custom_website_customer.customer_created_thanks</field>
+        <field name="arch" type="xml">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <h1>Thanks!</h1>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="col-lg-8">
+                                    <div class="alert alert-success" role="status">
+                                        New Customer Has Been Created
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </field>
+
+    </record>
+</odoo>

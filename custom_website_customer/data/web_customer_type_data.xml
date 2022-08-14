@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record forcecreate="True" id="type_whole_saler" model="web.customer.type">
+            <field name="name">Wholesaler/Retailer</field>
+        </record>
+
+<!--        <record forcecreate="True" id="type_retailer" model="web.customer.type">-->
+<!--            <field name="name">Retailer</field>-->
+<!--        </record>-->
+
+        <record forcecreate="True" id="type_consumer" model="web.customer.type">
+            <field name="name">Consumer</field>
+        </record>
+
+
+    </data>
+</odoo>

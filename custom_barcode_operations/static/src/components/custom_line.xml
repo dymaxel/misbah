@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t owl="1" t-name="custom_barcode_operations.CustomLineComponent" t-inherit="stock_barcode.LineComponent"
+       t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_barcode_line_details', 'flex-grow-1' ,'flex-column' ,'flex-nowrap')]"
+               position="before">
+            <div style="margin-right:10px;">
+                <img t-att-src="line.website_image_url" style="height:85px;width:100px;"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('o_barcode_line_details', 'flex-grow-1' ,'flex-column' ,'flex-nowrap')]"
+               position="after">
+            <div class="o_barcode_line_details flex-grow-1 flex-column flex-nowrap">
+                <input name="notes" placeholder="Add Notes" t-on-change="addNotes" type="text"
+                       t-att-value="line.notes or ''" autocomplete="off" style='background-color:#f9f5f5;'
+                       class="o_line_button o_edit btn-secondary ml-2 ml-sm-4"/>
+            </div>
+        </xpath>
+        <xpath expr="//div[@name='quantity']" position="before">
+            <i t-if="line.case_barcode || line.product_barcode" class="fa fa-barcode"/>
+            <span t-if='line.product_barcode' class="o_barcode_product_ref ml-2">
+                [<t t-esc="line.product_barcode"/>]
+            </span>
+
+            <span t-if='line.case_barcode' class="o_barcode_product_ref  ml-2">
+                [<t t-esc="line.case_barcode"/>]
+            </span>
+        </xpath>
+        <xpath expr="//div[@name='quantity']" position="after">
+            <i t-if="line.location_name" class="fa fa-map-marker"/>
+            <span t-if='line.location_name' class="o_barcode_product_ref ml-2">
+                <t t-esc="line.location_name"/>
+            </span>
+        </xpath>
+        <xpath expr="//div[@name='quantity']" position="after">
+            <i t-if="line.location_name" class="fa fa-map-marker"/>
+            <span t-if='line.location_name' class="o_barcode_product_ref ml-2">
+                <t t-esc="line.location_name"/>
+            </span>
+        </xpath>
+
+        <xpath expr="//span[@t-if='props.displayUOM']" position="after">
+            <span t-if="line.demand_qty_packages" t-esc="'  /  ' + line.demand_qty_packages + '  '"/>
+            <span t-if=" line.demand_qty_packages and line.pkg_name" t-esc="line.pkg_name"/>
+        </xpath>
+
+        <xpath expr="//button[@name='incrementButton']" position="replace">
+            <button t-if="env.model.getDisplayIncrementBtn(line)" name="incrementButton"
+                    t-on-click="addQuantity(incrementQty)" t-esc="'+' + incrementQty"
+                    id="custom_popup" class="o_line_button o_add_quantity btn btn-primary ml-2 ml-sm-4"/>
+
+
+            <div class="modal fade" id="BarCode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+            <div class="modal-dialog password">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                        <h4 class="modal-title" id="myModalLabel">Barcode Authentication</h4>
+                    </div>
+                    <div class="modal-body">Password required to add multiple quantities at once!</div>
+                    <div class="row">
+                     <div class="col-md-3">
+                         <label>Enter Password</label>
+                     </div>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control barcode_text" id="barcode_pass"
+                                   placeholder="Enter Barcode Password"></input>
+                            <span id="validation_text" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default close_custom_popup" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary barcd_pass">Submit</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </xpath>
+    </t>
+
+
+</templates>

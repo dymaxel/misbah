@@ -1,0 +1,58 @@
+# -*- coding: utf-8 -*-
+# Copyright (C) Softhealer Technologies.
+
+from odoo import fields, models
+
+
+class Website(models.Model):
+    _inherit = 'website'
+
+    show_stock_notification = fields.Boolean(
+        string="Show Stock Notification?", default=False)
+    show_product_qty = fields.Boolean(
+        string="Show Available Qty?", default=False)
+    show_only_left_qty_notification = fields.Boolean(
+        string="Show Only Left Quantity ?", default=False)
+    show_left_product_qty = fields.Float(string="Only Left Quantity")
+    exclude_outof_stock_product = fields.Boolean(
+        string="Exclude Out Of Stock Product")
+
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    show_stock_notification = fields.Boolean(
+        related="website_id.show_stock_notification", string="Show Stock Notification?", readonly=False)
+    show_product_qty = fields.Boolean(
+        related="website_id.show_product_qty", string="Show Available Qty?", readonly=False)
+    show_only_left_qty_notification = fields.Boolean(
+        related="website_id.show_only_left_qty_notification", string="Enable Show Only Left Quantity ?", readonly=False)
+    show_left_product_qty = fields.Float(
+        related="website_id.show_left_product_qty", string="Show Only Left Quantity?", readonly=False)
+    exclude_outof_stock_product = fields.Boolean(
+        related="website_id.exclude_outof_stock_product", readonly=False, string="Exclude Out Of Stock Product")
+
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    hide_product_stock = fields.Boolean("Hide Product Stock Status?")
+    upc = fields.Char("UPC")
+    expiry_lot_date = fields.Date("Expiry Lot Date")
+    min_qty = fields.Float("Minimum Order Qty")
+    hide_product_stock = fields.Boolean("Hide Product Stock Status?")
+    prod_templ = fields.Boolean(
+        "Compute Product Template", compute="_compute_product_template")
+
+    def _compute_product_template(self):
+        self.prod_templ = True
+
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    prod_templ = fields.Boolean(
+        "Compute Product Variant", compute="_compute_product_variant")
+
+    def _compute_product_variant(self):
+        self.prod_templ = False

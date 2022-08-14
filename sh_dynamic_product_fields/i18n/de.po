@@ -1,0 +1,76 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_dynamic_product_fields
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-31 09:26+0000\n"
+"PO-Revision-Date: 2020-10-31 09:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_dynamic_product_fields
+#: code:addons/sh_dynamic_product_fields/controllers/main.py:0
+#, python-format
+msgid ""
+"\n"
+"                    <a href=\"/web/content/product.template/%(product_id)s/%(field_name)s?download=true\">%(field_description)s</a>\n"
+"                    "
+msgstr ""
+"\n"
+"                    <a href=\"/web/content/product.template/%(product_id)s/%(field_name)s?download=true\">%(field_description)s</a>\n"
+"                    "
+
+#. module: sh_dynamic_product_fields
+#: code:addons/sh_dynamic_product_fields/controllers/main.py:0
+#, python-format
+msgid ""
+"\n"
+"                <span>\n"
+"                    <strong> %(field_description)s: </strong> %(field_value)s \n"
+"                </span><br/>\n"
+"        "
+msgstr ""
+"\n"
+"                <span>\n"
+"                    <strong> %(field_description)s: </strong> %(field_value)s \n"
+"                </span><br/>\n"
+"        "
+
+#. module: sh_dynamic_product_fields
+#: model:ir.model,name:sh_dynamic_product_fields.model_res_config_settings
+msgid "Config Settings"
+msgstr "Konfigurationseinstellungen"
+
+#. module: sh_dynamic_product_fields
+#: model:ir.model.fields,field_description:sh_dynamic_product_fields.field_res_config_settings__sh_dynamic_product_fields_ids
+#: model:ir.model.fields,field_description:sh_dynamic_product_fields.field_website__sh_dynamic_product_fields_ids
+msgid "Product Fields"
+msgstr "Produktfelder"
+
+#. module: sh_dynamic_product_fields
+#: model:ir.model.fields,field_description:sh_dynamic_product_fields.field_product_product__sh_dynamic_product_fields_raw_html
+#: model:ir.model.fields,field_description:sh_dynamic_product_fields.field_product_template__sh_dynamic_product_fields_raw_html
+msgid "Product Fields Data"
+msgstr "Produktfelddaten"
+
+#. module: sh_dynamic_product_fields
+#: model:ir.model,name:sh_dynamic_product_fields.model_product_template
+msgid "Product Template"
+msgstr "Produktvorlage"
+
+#. module: sh_dynamic_product_fields
+#: model_terms:ir.ui.view,arch_db:sh_dynamic_product_fields.sh_dynamic_product_fields_res_config_settings
+msgid "Products Custom Fields: E-shop"
+msgstr "Produkte Benutzerdefinierte Felder: E-Shop"
+
+#. module: sh_dynamic_product_fields
+#: model:ir.model,name:sh_dynamic_product_fields.model_website
+msgid "Website"
+msgstr "Webseite"

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="generate_product_catalog_wizard_view" model="ir.ui.view">
+        <field name="name">generate.product.catalog.wizard.view</field>
+        <field name="model">product.catalog.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generate Product Catalog">
+                <sheet>
+                <group>
+                    <group>
+                        <field name="catalog_type" widget="radio" />
+                        <field name="product_ids" widget="many2many_tags" attrs="{'invisible':[('catalog_type','=','category')]}" />
+                        <field name="category_ids" widget="many2many_tags" domain="[('child_id', '=', False)]" attrs="{'invisible':[('catalog_type','=','product')]}" />
+                        <field name="image" />
+                        <!-- <field name="image_size" widget="radio" attrs="{'invisible':['|',('image','=',False),('style','=','style_4')]}" /> -->
+                        <field name="currency_id" />
+                        <field name="price" />
+                        <field name="pricelist_id" attrs="{'invisible':[('price','=',False)]}" />
+                    </group>
+                    <group>
+                        <field name="style" widget="radio" />
+                        <field name="style_box" widget="radio" attrs="{'invisible':[('style','in',['style_1','style_3','style_4'])]}" />
+                        <field name="description" />
+                        <field name="product_link" />
+                        <field name="int_ref" />
+                        <field name="on_hand" />
+                        <!-- <field name="break_page" attrs="{'invisible':[('style','in',['style_1'])]}" /> -->
+                        <!-- <field name="break_page_after_products" attrs="{'invisible':[('break_page','=',False)]}" /> -->
+                    </group>
+                </group>
+                
+                <footer>
+                    <button name="print_report" string="Print" class="oe_highlight" type="object" />
+                    or
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="generate_product_catalog_wizard_action" model="ir.actions.act_window">
+        <field name="name">Generate Product Catalog</field>
+        <field name="res_model">product.catalog.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+
+    <menuitem
+        id="menu_generate_product_catalog"
+        name="Generate Product Catalog"
+        action="generate_product_catalog_wizard_action"
+        parent="sh_product_catalog_generator.product_catalog_sub_menu"
+        sequence="1"
+        groups="sh_product_catalog_generator.sh_catalog_manager"
+    />
+
+    <record id="menu_catlog_download" model="website.menu">
+        <field name="name">Download Catalog</field>
+        <field name="url">/download_catalog</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">10</field>
+    </record>
+</odoo>

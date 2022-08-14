@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_website_res_config_settings_product_stock_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.product.stock</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website_sale.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div//div[@id='sale_product_catalog_settings']" position="after">
+                <h2>Website Product Stock</h2>
+
+                <div class="row mt16 o_settings_container">
+                    <div class="col-xs-6 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="show_stock_notification" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="show_stock_notification" />
+                            <div class="text-muted">
+                                Show product stock notification on website
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6 o_setting_box" attrs="{'invisible':[('show_stock_notification','=',False)]}">
+                        <div class="o_setting_left_pane">
+                            <field name="show_product_qty" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="show_product_qty" />
+                            <div class="text-muted">
+                                Show available product quantity
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt16 o_settings_container" attrs="{'invisible':[('show_stock_notification','=',False)]}">
+                    <div class="col-xs-6 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="exclude_outof_stock_product" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="exclude_outof_stock_product" />
+                            <div class="text-muted">
+                                Exclude out of stock product from website
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt16 o_settings_container" attrs="{'invisible':[('show_stock_notification','=',False)]}">
+                    <div class="col-xs-6 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="show_only_left_qty_notification" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="show_only_left_qty_notification" />
+                            <div class="text-muted">
+                                Show only left qty on website
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6 o_setting_box" attrs="{'invisible':[('show_only_left_qty_notification','=',False)]}">
+                        <div class="o_setting_right_pane">
+                            <label for="show_left_product_qty" />
+                            <field name="show_left_product_qty" />
+                            <div class="text-muted">
+                                Show only left quantity
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

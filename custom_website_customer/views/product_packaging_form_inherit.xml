@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_package_form_inherit_customer_type" model="ir.ui.view">
+            <field name="name">product.package.form.inherit.customer.type</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="customer_type_ids" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+
+    <record id="product_template_only_form_view_customer_type" model="ir.ui.view">
+        <field name="name">product.template.view.form.customer.type</field>
+        <field name="model">product.packaging</field>
+        <field name="inherit_id" ref="product.product_packaging_tree_view"/>
+        <field name="arch" type="xml">
+                <xpath expr="//field[@name='qty']" position="after">
+                    <field name="customer_type_ids" widget="many2many_tags"/>
+                </xpath>
+       </field>
+   </record>
+
+</odoo>

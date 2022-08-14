@@ -1,0 +1,20 @@
+
+div#scan_barcode_header1 {
+    font-size: 17px;
+    float: left;
+    margin-left: 41% !important;
+}
+input#scan_products {
+    margin-right: 6px;
+}
+#scan_barcode_header1 label {
+     margin-top: -3px;
+    margin-right: 28px;
+}
+input#scan_packages {
+    margin-right: 6px;
+}
+input[type=radio] {
+    height: 19px;
+    width: 35px;
+}

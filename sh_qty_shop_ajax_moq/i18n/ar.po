@@ -1,0 +1,156 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sh_qty_shop_ajax_moq
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-21 06:05+0000\n"
+"PO-Revision-Date: 2020-11-21 06:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_website_sale_header_inherit
+msgid ""
+"<i class=\"fa fa-shopping-cart\"/>\n"
+"                    My Cart"
+msgstr ""
+"<i class=\"fa fa-shopping-cart\"/>\n"
+"                    عربة التسوق الخاصة بي"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_products_add_to_cart_inherit
+msgid "<span class=\"fa fa-shopping-cart\" role=\"img\" aria-label=\"Shopping cart\"/>"
+msgstr "<span class=\"fa fa-shopping-cart\" role=\"img\" aria-label=\"عربة التسوق\"/>"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_products_item_inherit_qty
+msgid "Add one"
+msgstr "أضف واحدا"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_website_sale_product_inherit
+msgid "Add to Cart"
+msgstr "أضف إلى السلة"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model,name:sh_qty_shop_ajax_moq.model_res_company
+msgid "Companies"
+msgstr "الشركات"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model,name:sh_qty_shop_ajax_moq.model_res_config_settings
+msgid "Config Settings"
+msgstr "إعدادات التكوين"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__create_uid
+msgid "Created by"
+msgstr "انشأ من قبل"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__create_date
+msgid "Created on"
+msgstr "تم إنشاؤها على"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__id
+msgid "ID"
+msgstr "هوية شخصية"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website____last_update
+msgid "Last Modified on"
+msgstr "تاريخ آخر تعديل"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model,name:sh_qty_shop_ajax_moq.model_sh_moq_multi_website
+msgid "MOQ Multi Website"
+msgstr "موك متعدد الموقع"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_product__multi_website_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_template__multi_website_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_res_company__multi_website_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_res_config_settings__multi_website_moq
+msgid "MOQ for Multi Website?"
+msgstr "موك للمواقع المتعددة؟"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_product_template_form_view
+msgid "Multi Website MOQ"
+msgstr "متعدد موقع موك"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_moq_multi_website_res_config_settings_view_form
+msgid "Multiple Qty for Multi Website"
+msgstr "الكمية المتعددة للمواقع المتعددة"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_product__sh_increment_qty
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_template__sh_increment_qty
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__sh_increment_qty
+msgid "Multiples of Quantity"
+msgstr "مضاعفات الكمية"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model,name:sh_qty_shop_ajax_moq.model_product_template
+msgid "Product Template"
+msgstr "نموذج المنتج"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_products_item_inherit_qty
+msgid "Remove one"
+msgstr "إزالة واحدة"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model,name:sh_qty_shop_ajax_moq.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "خط طلب المبيعات"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_products_add_to_cart_inherit
+msgid "Shopping cart"
+msgstr "عربة التسوق"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_sh_moq_multi_website__website_id
+msgid "Website"
+msgstr "موقع الكتروني"
+
+#. module: sh_qty_shop_ajax_moq
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_product__multi_website_ids
+#: model:ir.model.fields,field_description:sh_qty_shop_ajax_moq.field_product_template__multi_website_ids
+msgid "Website wise MOQ"
+msgstr "موقع الحكمة موك"
+
+#. module: sh_qty_shop_ajax_moq
+#: model_terms:ir.ui.view,arch_db:sh_qty_shop_ajax_moq.sh_product_template_form_view
+msgid "Website wise Qty"
+msgstr "الموقع الحكيم الكمية"

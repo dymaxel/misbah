@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="add_survey_menu" inherit_id="website.navbar_nav">
+			<xpath expr="//ul" position="inside">
+				<li class="nav-item">
+					<a href="/survey" class="nav-link">Surveys</a>
+				</li>
+			</xpath>
+	</template>
+</odoo>

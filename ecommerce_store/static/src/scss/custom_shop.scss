@@ -1,0 +1,43 @@
+.modal-backdrop.fade.show {
+    display: none;
+}
+form#accept {
+    background: white !important;
+}
+
+#products_grid .o_wsale_product_information_text
+h6.o_wsale_products_item_title.mb-1
+a.text-primary.text-decoration-none {
+    color: black !important;
+    font-weight: bold;
+}
+#products_grid .o_wsale_product_information_text
+h6.o_wsale_products_item_title.mb-1{
+    text-align:center;
+}
+
+#products_grid .o_wsale_product_information_text .product_price.mb-1 {
+    text-align: center;
+}
+
+#select_customers {
+    display: none;
+}
+
+#products_grid .o_wsale_product_information_text .product_price.mb-1 .oe_currency_value{
+
+    font-weight:bold;
+}
+
+#wsale_products_categories_collapse{
+    ul{
+        li{
+            i:nth-child(2){
+                display:none;
+            }
+        }
+    }
+
+}
+
+

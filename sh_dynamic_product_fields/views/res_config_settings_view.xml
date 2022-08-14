@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sh_dynamic_product_fields_res_config_settings" model="ir.ui.view">
+        <field name="name">sh.dynamic.product.fields.res.config.settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="website.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='website_settings']" position="after">
+                <h2>Products Custom Fields: E-shop</h2>
+                <div class="row mt16 o_settings_container" id="sh_dynamic_product_fields_settings_div">
+                    <div class="col-12 col-md-12 o_setting_box">
+                        <group name="sh_dynamic_product_fields_group">
+                            <field name="sh_dynamic_product_fields_ids" widget="many2many_tags" options="{'no_create': True}" />
+                        </group>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
