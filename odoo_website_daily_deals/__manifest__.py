@@ -5,7 +5,7 @@
 
 {
     "name" : "Odoo Website Daily Offers & Deals",
-    "version" : "15.0.3",
+    "version" : "15.0.4",
     "category" : "eCommerce",
     "depends" : ['sale_management','website','website_sale','sh_product_catalog_generator'],
     "author": "BrowseInfo",

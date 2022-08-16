@@ -3,7 +3,7 @@
 
 {
     'name': 'Website Customer',
-    'version': '15.0.3',
+    'version': '15.0.4',
     'category': 'Sale',
     'summary': 'Module for Odoo Reporting',
     'sequence': '4',

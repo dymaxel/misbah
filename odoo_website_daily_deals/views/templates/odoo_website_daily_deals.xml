@@ -219,7 +219,7 @@
 																			<span t-esc="products.product_tmpl_id.product_variant_ids[0].bilingual_frenchlabel"></span>
 																		</li>
 																		<t t-if="products.product_tmpl_id.product_variant_ids[0].expiry_lot_date">
-																			<li style="    font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry:
+																			<li style="font-size: 13px;font-family: 'Archivo Narrow';font-weight: normal;">Expiry:
 																				<span t-esc="products.product_tmpl_id.product_variant_ids[0].expiry_lot_date" t-options="{'widget': 'date'}" ></span>
 																			</li>
 																		</t>

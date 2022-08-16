@@ -86,7 +86,7 @@ class OdooWebsiteDealsOffers(http.Controller):
             return request.make_response(pdf, headers=pdfhttpheaders)
 
     # deals_offers Menu
-    @http.route(['/deals'], type='http', auth="public", website=True)
+    @http.route(['/deals'], type='http', auth="user", website=True)
     def deals(self, page=0, category=None, search='', **post):
         cr, uid, context, pool = request.cr, request.uid, request.context, request.registry
 
